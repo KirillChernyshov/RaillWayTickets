@@ -33,11 +33,27 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+    props: {
+    },
+    data: () => ({
+        msg: "hello",
+    }),
+    methods: {
+
+    },
+    created() {
+        axios.get('/ping')
+            .then((req) => {
+                this.msg = req.data;
+            })
+            .catch((err) => {
+                this.msg = err;
+            })
+    }
 }
 </script>
 
