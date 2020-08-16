@@ -1,6 +1,8 @@
 env
 app/__pycache__
 app/routes/__pycache__
+app/routes/main/__pycache__
+app/routes/users/__pycache__
 app/static
 
 /.idea

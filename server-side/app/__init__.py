@@ -9,11 +9,10 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
+from flask_cors import CORS
 from .config import Config
 import logging
 
-
-from flask_cors import CORS
 
 
 app = Flask(__name__,
@@ -21,11 +20,9 @@ app = Flask(__name__,
             template_folder="./static")
 
 app.config.from_object(Config)
-
 app.config.from_object(__name__)
 
 CORS(app)
-
 
 client = app.test_client()
 
@@ -39,7 +36,6 @@ Base.query = session.query_property()
 jwt = JWTManager(app)
 
 docs = FlaskApiSpec()
-docs.init_app(app)
 
 app.config.update({
     'APISPEC_SPEC': APISpec(
@@ -72,57 +68,6 @@ logger = setup_logger()
 
 
 
-@app.route('/')
-def index():
-    # тут просто пробрасываем файлик, без всякого препроцессинга
-    print("hi")
-    return render_template("index.html")
-
-
-@app.route('/dist/<path:path>')
-def static_dist(path):
-    # тут пробрасываем статику
-    return send_from_directory("static/dist", path)
-
-
-@app.route('/pang', methods=['GET'])
-@marshal_with(TestSchema())
-def pingf_pong():
-    teststr = TestClass('pung!')
-    return teststr
-
-@app.route('/register', methods=['POST'])
-@use_kwargs(UserSchema)
-@marshal_with(AuthSchema)
-def register(**kwargs):
-    try:
-        user = User(**kwargs, role='client')
-        session.add(user)
-        session.commit()
-        token = user.get_token()
-    except Exception as e:
-        logger.warning(
-            f'registration failed with errors: {e}')
-        return {'message': str(e)}, 400
-    return {'access_token': token}
-
-
-@app.route('/login', methods=['POST'])
-@use_kwargs(UserSchema(only=('email', 'password')))
-@marshal_with(AuthSchema)
-def login(**kwargs):
-    try:
-        user = User.authenticate(**kwargs)
-        token = user.get_token()
-    except Exception as e:
-        logger.warning(
-            f'login with email {kwargs["email"]} failed with errors: {e}')
-        return {'message': str(e)}, 400
-
-    return {'access_token': token}
-
-
-
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     session.remove()
@@ -130,8 +75,15 @@ def shutdown_session(exception=None):
 
 from app.routes import test
 
-
 docs.register(pingf_pong)
-docs.register(register)
-docs.register(login)
+
+
+from .routes.users.views import users
+from .routes.main.views import main
+
+app.register_blueprint(users)
+app.register_blueprint(main)
+
+docs.init_app(app)
+jwt.init_app(app)
 
