@@ -4,12 +4,14 @@ from apispec import APISpec
 from flask_apispec.extension import  FlaskApiSpec
 from .schemas import *
 from flask_apispec import use_kwargs, marshal_with
-
+from flask_cors import CORS
 
 app = Flask(__name__,
             static_folder="./static/dist",
             template_folder="./static")
 app.config.from_object(__name__)
+
+CORS(app)
 
 client = app.test_client()
 
