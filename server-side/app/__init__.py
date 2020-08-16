@@ -75,8 +75,6 @@ def shutdown_session(exception=None):
 
 from app.routes import test
 
-docs.register(pingf_pong)
-
 
 from .routes.users.views import users
 from .routes.main.views import main

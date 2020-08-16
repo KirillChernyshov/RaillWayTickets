@@ -21,7 +21,10 @@ def static_dist(path):
     return send_from_directory("static/dist", path)
 
 @main.route('/pang', methods=['GET'])
-@marshal_with(TestSchema())
+@marshal_with(TestSchema)
 def pingf_pong():
     teststr = TestClass('pung!')
     return teststr
+
+docs.register(pingf_pong, blueprint='main')
+
