@@ -2,4 +2,6 @@ env
 app/__pycache__
 app/routes/__pycache__
 app/static
-.idea
+
+/.idea
+/__pycache__
