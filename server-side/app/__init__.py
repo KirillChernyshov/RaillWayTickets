@@ -13,10 +13,20 @@ from .config import Config
 import logging
 
 
+from flask_cors import CORS
+
+
 app = Flask(__name__,
             static_folder="./static/dist",
             template_folder="./static")
+
 app.config.from_object(Config)
+
+app.config.from_object(__name__)
+
+CORS(app)
+
+
 client = app.test_client()
 
 engine = create_engine('sqlite:///db.sqlite')
