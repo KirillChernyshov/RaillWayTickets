@@ -5,3 +5,4 @@ app/static
 
 /.idea
 /__pycache__
+log/api.log

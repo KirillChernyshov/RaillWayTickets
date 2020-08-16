@@ -12,11 +12,15 @@ class UserSchema(Schema):
     password = fields.String(required=True, validate=[
         validate.Length(max=100)], load_only=True)
 
+class AuthSchema(Schema):
+    access_token = fields.String(dump_only=True)
+    message = fields.String(dump_only=True)
+
+
+
 
 class TestClass():
     def __init__(self, str):
         self.message = str
 
-    @classmethod
-    def query(cls):
 

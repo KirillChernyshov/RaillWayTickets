@@ -2,7 +2,7 @@ from flask import Flask, jsonify, send_from_directory, render_template, request
 from apispec.ext.marshmallow import MarshmallowPlugin
 from apispec import APISpec
 from flask_apispec.extension import  FlaskApiSpec
-from .schemas import *
+from .schemas import UserSchema, AuthSchema, TestClass, TestSchema
 from flask_apispec import use_kwargs, marshal_with
 import sqlalchemy as db
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -10,6 +10,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from .config import Config
+import logging
 
 
 app = Flask(__name__,
@@ -44,6 +45,20 @@ from .model import *
 
 Base.metadata.create_all(bind=engine)
 
+def setup_logger():
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+
+    formatter = logging.Formatter(
+        '%(asctime)s:%(name)s:%(levelname)s:%(message)s')
+    file_handler = logging.FileHandler('log/api.log')
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    return logger
+
+
+logger = setup_logger()
 
 
 
@@ -67,20 +82,33 @@ def pingf_pong():
     return teststr
 
 @app.route('/register', methods=['POST'])
-def register():
-    params = request.json
-    user = User(**params)
-    session.add(user)
-    session.commit()
-    token = user.get_token()
+@use_kwargs(UserSchema)
+@marshal_with(AuthSchema)
+def register(**kwargs):
+    try:
+        user = User(**kwargs, role='client')
+        session.add(user)
+        session.commit()
+        token = user.get_token()
+    except Exception as e:
+        logger.warning(
+            f'registration failed with errors: {e}')
+        return {'message': str(e)}, 400
     return {'access_token': token}
 
 
 @app.route('/login', methods=['POST'])
-def login():
-    params = request.json
-    user = User.authenticate(**params)
-    token = user.get_token()
+@use_kwargs(UserSchema(only=('email', 'password')))
+@marshal_with(AuthSchema)
+def login(**kwargs):
+    try:
+        user = User.authenticate(**kwargs)
+        token = user.get_token()
+    except Exception as e:
+        logger.warning(
+            f'login with email {kwargs["email"]} failed with errors: {e}')
+        return {'message': str(e)}, 400
+
     return {'access_token': token}
 
 

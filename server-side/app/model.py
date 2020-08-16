@@ -11,10 +11,12 @@ class User(Base):
     name = db.Column(db.String(250), nullable=False)
     email = db.Column(db.String(250), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
+    role = db.Column(db.String(100), nullable=False)
 
     def __init__(self, **kwargs):
         self.name = kwargs.get('name')
         self.email = kwargs.get('email')
+        self.role = kwargs.get('role')
         self.password = bcrypt.hash(kwargs.get('password'))
 
     def get_token(self, expire_time=24):
