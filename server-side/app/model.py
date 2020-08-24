@@ -9,8 +9,8 @@ from passlib.hash import bcrypt
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
-    name = Column(String(50))
-    surname = Column(String(50))
+    firstname = Column(String(50))
+    lastname = Column(String(50))
     email = Column(String(250), nullable=False, unique=True)
     password = Column(String(100), nullable=False)
     role = Column(String(100), nullable=False)

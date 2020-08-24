@@ -5,9 +5,9 @@ class TestSchema(Schema):
 
 
 class UserSchema(Schema):
-    name = fields.String(required=True, validate=[
+    firstname = fields.String(required=True, validate=[
         validate.Length(max=250)])
-    surname = fields.String(required = True,
+    lastname = fields.String(required = True,
                             validate=[validate.Length(max=250)])
     email = fields.String(required=True, validate=[
         validate.Length(max=250)])
