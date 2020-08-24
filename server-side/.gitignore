@@ -1,11 +1,10 @@
 env
-app/__pycache__
-app/routes/__pycache__
-app/routes/main/__pycache__
-app/routes/users/__pycache__
 app/static
 
 /.idea
 /__pycache__
 /**/__pycache__/*
+/**/.pytest_cache/*
+/alembic/*
+alembic.ini
 log/api.log

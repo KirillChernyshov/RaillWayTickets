@@ -9,13 +9,15 @@ from passlib.hash import bcrypt
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
+    name = Column(String(50))
+    surname = Column(String(50))
     email = Column(String(250), nullable=False, unique=True)
     password = Column(String(100), nullable=False)
     role = Column(String(100), nullable=False)
 
     def __init__(self, **kwargs):
         self.name = kwargs.get('name')
+        self.surname = kwargs.get('surname')
         self.email = kwargs.get('email')
         self.role = kwargs.get('role')
         self.password = bcrypt.hash(kwargs.get('password'))

@@ -47,9 +47,6 @@ app.config.update({
     'APISPEC_SWAGGER_URL': '/swagger/'
 })
 
-from .model import *
-
-Base.metadata.create_all(bind=engine)
 
 def setup_logger():
     logger = logging.getLogger(__name__)

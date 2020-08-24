@@ -32,7 +32,8 @@ def session(testapp):
 @pytest.fixture(scope='function')
 def user(session):
     user = User(
-        name='testnick',
+        name='testn',
+        surname='testsg',
         email='testmail@mail.com',
         password='passw',
         role='idiot'
