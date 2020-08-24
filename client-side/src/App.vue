@@ -36,9 +36,11 @@ export default {
 
 #content {
     background-color: white;
+    box-sizing: border-box;
     margin: auto;
     max-width: 1024px;
     padding-top: 8vh;
+    padding-bottom: 3vh;
     width: 120vh;
     /* height: 300vh; */
 }
