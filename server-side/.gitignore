@@ -7,4 +7,5 @@ app/static
 
 /.idea
 /__pycache__
+/**/__pycache__/*
 log/api.log

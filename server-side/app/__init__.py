@@ -39,7 +39,7 @@ docs = FlaskApiSpec()
 
 app.config.update({
     'APISPEC_SPEC': APISpec(
-        title='videoblog',
+        title='railwaytickets',
         version='v1',
         openapi_version='2.0',
         plugins=[MarshmallowPlugin()],
