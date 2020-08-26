@@ -14,7 +14,7 @@
 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
 
-                    <b-nav-item href="#">Log In</b-nav-item>
+                    <b-nav-item href="/auth">Log In</b-nav-item>
                     <b-nav-item-dropdown right>
                     <!-- Using 'button-content' slot -->
                         <template v-slot:button-content>
