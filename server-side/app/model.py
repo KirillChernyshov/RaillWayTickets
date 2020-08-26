@@ -16,8 +16,8 @@ class User(Base):
     role = Column(String(100), nullable=False)
 
     def __init__(self, **kwargs):
-        self.name = kwargs.get('name')
-        self.surname = kwargs.get('surname')
+        self.firstname = kwargs.get('firstname')
+        self.lastname = kwargs.get('lastname')
         self.email = kwargs.get('email')
         self.role = kwargs.get('role')
         self.password = bcrypt.hash(kwargs.get('password'))

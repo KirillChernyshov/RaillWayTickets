@@ -2,7 +2,7 @@
 
 
 def test_model(user):
-    assert user.name == 'testn'
+    assert user.firstname == 'testn'
 
 def test_user_login(user, client):
     res = client.post('/login', json={
@@ -14,8 +14,8 @@ def test_user_login(user, client):
 
 def test_user_reg(client):
     res = client.post('/register', json={
-        'name': 'testname',
-        'surname': 'testsurname',
+        'firstname': 'testname',
+        'lastname': 'testsurname',
         'email': 'testingmail@mail.com',
         'password': 'passw'
     })

@@ -6,6 +6,7 @@ from app.model import User
 
 users = Blueprint('users', __name__)
 
+
 @users.route('/register', methods=['POST'])
 @use_kwargs(UserSchema)
 @marshal_with(AuthSchema)
@@ -19,7 +20,7 @@ def register(**kwargs):
         logger.warning(
             f'registration failed with errors: {e}')
         return {'message': str(e)}, 400
-    return {'access_token': token}
+    return {'access_token': token, 'firstname': user.firstname, 'lastname': user.lastname, 'role': user.role}
 
 
 @users.route('/login', methods=['POST'])
@@ -34,7 +35,8 @@ def login(**kwargs):
             f'login with email {kwargs["email"]} failed with errors: {e}')
         return {'message': str(e)}, 400
 
-    return {'access_token': token}
+    return {'access_token': token , 'firstname': user.firstname, 'lastname': user.lastname, 'role': user.role}
+
 
 docs.register(register, blueprint='users')
 docs.register(login, blueprint='users')
