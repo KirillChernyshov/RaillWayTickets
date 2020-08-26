@@ -18,9 +18,9 @@
                 >
                 </b-form-input>
             </b-form-group>
-            <b-button type="submit" variant="primary" size="sm">Регистрация</b-button>
+            <b-button type="submit" variant="primary" size="sm">Войти</b-button>
             <span>
-                или <b-link href="/auth">авторизоваться</b-link>
+                или <b-link href="/reg">зарегистрироваться</b-link>
             </span>
             <b-spinner v-if="waiting"
                 class="spiner"
@@ -36,23 +36,9 @@
 import { mapState } from 'vuex'
 
 export default {
-    name: "registration",
+    name: "authorization",
     data: () => ({
         form: {
-            firstname: {
-                label: "Имя:",
-                placeholder: "Введите имя",
-                value: "",
-                type: "text",
-                valid: null,
-            },
-            lastname: {
-                label: "Фамилия:",
-                placeholder: "Введите фамилию",
-                value: "",
-                type: "text",
-                valid: null,
-            },
             email: {
                 label: "Эл. почта:",
                 placeholder: "Введите адрес эл. почты",
@@ -67,56 +53,17 @@ export default {
                 type: "password",
                 valid: null,
             },
-            checkpass: {
-                label: "Повт. пароль:",
-                placeholder: "Повторите пароль",
-                value: "",
-                type: "password",
-                valid: null,
-            },
         },
     }),
     computed: {
         ...mapState({
-            waiting: state => state.reg.waiting,
-            error: state => state.reg.error,
+            waiting: state => state.auth.waiting,
+            error: state => state.auth.error,
         })
     },
     methods: {
-        validation() {
-            let count = 0;
-
-            for (let key of Object.keys(this.form)) {
-
-                let item = this.form[key];
-
-                if (item.value < 3) {
-                    item.valid = false;
-                    count++;
-                }
-                else {
-                    //item.valid = null;
-                }
-
-                if (key == "checkpass") continue;
-                if (key == "password") {
-                    if (item.value != this.form["checkpass"].value) {
-                        item.valid = false;
-                        this.form["checkpass"].valid = false;
-                    } else {
-                        item.valid = null;
-                        this.form["checkpass"].valid = null;
-                    }
-                }
-
-            }
-
-            return count;
-        },
         checkValid(e) {
             e.preventDefault();
-
-            if (this.validation() || this.waiting) return;
 
             let data = {};
 
@@ -124,7 +71,7 @@ export default {
                 data[key] = this.form[key].value
             }
 
-            this.$store.dispatch("reg/registration", data);
+            this.$store.dispatch("auth/authorization", data);
         },
     }
 }
