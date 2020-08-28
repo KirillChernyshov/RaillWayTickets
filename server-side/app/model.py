@@ -90,5 +90,6 @@ class Ticket(Base):
     cost = Column(Integer, nullable=False)
     wagon_id = Column(Integer, ForeignKey('wagons.id'), nullable=False)
     place_num = Column(Integer, nullable=False)
+    schedule_id = Column(Integer, ForeignKey('schedules.id'))
     is_booked = Column(Boolean, nullable=False)
-    book_end_date = Column(DateTime, nullable=False)
+    book_end_date = Column(DateTime, nullable=True)

@@ -1,0 +1,72 @@
+2020-08-28 19:10:56,257:app:ERROR:Exception on /search [GET]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\main\views.py", line 39, in get_schedules
+    routes = get_fit_routes(routes_info)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\main\views.py", line 49, in get_fit_routes
+    for i in range(len(routes_info)):
+TypeError: object of type 'Query' has no len()
+2020-08-28 19:12:43,854:app:ERROR:Exception on /search [GET]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 37, in __call__
+    mv = self.marshal_result(rv, status_code)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 66, in marshal_result
+    dumped = schema.dump(result)
+  File "c:\program files\python38\lib\site-packages\marshmallow\schema.py", line 557, in dump
+    result = self._serialize(processed_obj, many=many)
+  File "c:\program files\python38\lib\site-packages\marshmallow\schema.py", line 521, in _serialize
+    value = field_obj.serialize(attr_name, obj, accessor=self.get_attribute)
+  File "c:\program files\python38\lib\site-packages\marshmallow\fields.py", line 312, in serialize
+    return self._serialize(value, attr, obj, **kwargs)
+  File "c:\program files\python38\lib\site-packages\marshmallow\fields.py", line 700, in _serialize
+    return [self.inner._serialize(each, attr, obj, **kwargs) for each in value]
+  File "c:\program files\python38\lib\site-packages\marshmallow\fields.py", line 700, in <listcomp>
+    return [self.inner._serialize(each, attr, obj, **kwargs) for each in value]
+  File "c:\program files\python38\lib\site-packages\marshmallow\fields.py", line 567, in _serialize
+    return schema.dump(nested_obj, many=many)
+  File "c:\program files\python38\lib\site-packages\marshmallow\schema.py", line 557, in dump
+    result = self._serialize(processed_obj, many=many)
+  File "c:\program files\python38\lib\site-packages\marshmallow\schema.py", line 521, in _serialize
+    value = field_obj.serialize(attr_name, obj, accessor=self.get_attribute)
+  File "c:\program files\python38\lib\site-packages\marshmallow\fields.py", line 312, in serialize
+    return self._serialize(value, attr, obj, **kwargs)
+  File "c:\program files\python38\lib\site-packages\marshmallow\fields.py", line 1201, in _serialize
+    return format_func(value)
+  File "c:\program files\python38\lib\site-packages\marshmallow\utils.py", line 192, in isoformat
+    return datetime.isoformat()
+AttributeError: 'str' object has no attribute 'isoformat'
