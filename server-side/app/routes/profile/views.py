@@ -71,6 +71,8 @@ class UsersTickets(BaseView):
                                 'cost': ticket.cost})
             return ticket_data
 
+#class
+
 
 UserInfoView.register(profile, docs, '/profile', 'userinfoview')
 UsersTickets.register(profile, docs, '/user_tickets', 'userstickets')

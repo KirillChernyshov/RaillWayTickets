@@ -1,5 +1,5 @@
 from app import db, session, Base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean, UniqueConstraint
 from sqlalchemy.orm import relationship
 from flask_jwt_extended import create_access_token
 from datetime import timedelta
@@ -71,6 +71,7 @@ class Station(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     province = Column(String(50), nullable=False)
+    uniq_name = UniqueConstraint('name','province')
 
     def fullname(self):
         return self.province + " " + self.name

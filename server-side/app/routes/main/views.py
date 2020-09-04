@@ -99,19 +99,20 @@ def get_train_struct(train_id):
     return train_struct, wagon_types
 
 
-def get_seats_info(schedule, arr_stop, dep_stop):
+def get_seats_struct(schedule, arr_stop, dep_stop):
     train_struc, wagon_types = get_train_struct(schedule.train_id)
-    tickets = get_tickets(schedule.id)
-    for ticket in tickets:
-        if (((ticket.departure_stop < dep_stop.id) == (ticket.arrival_stop > arr_stop.id)) |
-                ((ticket.departure_stop < dep_stop.id) & (ticket.arrival_stop > dep_stop.id)) |
-                ((ticket.departure_stop < arr_stop.id) & (ticket.arrival_stop > arr_stop.id))):
-            train_struc[ticket.wagon_id][ticket.place_num] = False
-    empty_places = 0
-    ride_cost = 4
-    places = list(train_struc.values())
+    mark_booked_seats(train_struc, schedule, arr_stop, dep_stop)
+    places_stat = count_empty_seats(train_struc, wagon_types)
+    return places_stat
+
+
+def get_tickets(schedule_id):
+    tickets = session.query(Ticket).filter(Ticket.schedule_id)
+    return tickets
+
+def count_empty_seats(train_struc, wagon_types):
     places_stat = {}
-    print(train_struc)
+    ride_cost = 4
     for wagon_id, wagon_places in train_struc.items():
         if places_stat.get(wagon_types[wagon_id]) is None:
             places_stat[wagon_types[wagon_id]] = \
@@ -122,32 +123,15 @@ def get_seats_info(schedule, arr_stop, dep_stop):
     for type_name, type_stat in places_stat.items():
         if type_stat['num_of_places'] == 0:
             places_stat.pop(type_name)
-
-    for i in range(len(places)):
-        for y in range(len(places[i])):
-            if places[i][y]:
-                empty_places += 1
-    # arr_station = session.query(Station.name).fliter(Station.id == arr_stop.station_id)
-    #     dep_station = session.query(Station.name).filter(Station.id == dep_stop.station_id)
-    #     route_name = session.query
-    #     routings.append([schedule.id, arr_station, dep_station,arr_stop.arriving, dep_stop.departure])
     return places_stat
 
-
-def get_tickets(schedule_id):
-    tickets = session.query(Ticket).filter(Ticket.schedule_id)
-    return tickets
-
-
-def get_places_plan(wagon_id, schedule, arr_stop, dep_stop):
-    train_struc, wagon_types = get_train_struct(schedule.train_id)
+def mark_booked_seats( train_struc, schedule, arr_stop, dep_stop):
     tickets = get_tickets(schedule.id)
     for ticket in tickets:
         if (((ticket.departure_stop < dep_stop.id) == (ticket.arrival_stop > arr_stop.id)) |
                 ((ticket.departure_stop < dep_stop.id) & (ticket.arrival_stop > dep_stop.id)) |
                 ((ticket.departure_stop < arr_stop.id) & (ticket.arrival_stop > arr_stop.id))):
             train_struc[ticket.wagon_id][ticket.place_num] = False
-    return train_struc, wagon_types
 
 
 docs.register(get_schedules, blueprint="main")
