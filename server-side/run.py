@@ -5,6 +5,13 @@ from app.model import *
 #app = create_app()
 
 def mockup():
+    users = [User(
+        firstname='testn',
+        lastname='testsg',
+        email='testmail@mail.com',
+        password='passw',
+        role='client')]
+    session.add_all(users)
     stations = [Station(name="лубянка-1", province="Рязанская область"),
                 Station(name="искра-1", province="Рязанская область"),
                 Station(name="боровое-1", province="Рязанская область"),
@@ -35,9 +42,9 @@ def mockup():
     session.add_all(schedules)
     session.commit()
     tickets = [Ticket(departure_stop=stops[2].id, arrival_stop=stops[3].id, cost=34, wagon_id=wagons[0].id, place_num=2,
-                      schedule_id=schedules[0].id, is_booked=False),
+                      schedule_id=schedules[0].id, is_booked=False, user_id = users[0].id),
                Ticket(departure_stop=stops[1].id, arrival_stop=stops[3].id, cost=34, wagon_id=wagons[1].id, place_num=3,
-                      schedule_id=schedules[0].id, is_booked=False)]
+                      schedule_id=schedules[0].id, is_booked=False, user_id = users[0].id)]
     session.add_all(tickets)
     session.commit()
 

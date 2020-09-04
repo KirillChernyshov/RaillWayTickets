@@ -39,7 +39,7 @@ def user(session):
         lastname='testsg',
         email='testmail@mail.com',
         password='passw',
-        role='idiot'
+        role='client'
     )
     session.add(user)
     session.commit()
@@ -66,7 +66,6 @@ def user_headers(user_token):
     headers = {
         'Authorization': f'Bearer {user_token}'
     }
-
     return headers
 
 
@@ -113,9 +112,9 @@ def trains(session):
 
 @pytest.fixture
 def wagons(trains, session):
-    wagons = [Wagon(train_id=trains[0].id, type='type-1', places_count=5),
-              Wagon(train_id=trains[0].id, type='type-2', places_count=4),
-              Wagon(train_id=trains[0].id, type='type-3', places_count=2)]
+    wagons = [Wagon(train_id=trains[0].id, type='Купе', places_count=5),
+              Wagon(train_id=trains[0].id, type='Плацкартовый', places_count=4),
+              Wagon(train_id=trains[0].id, type='Купе', places_count=2)]
     session.add_all(wagons)
     session.commit()
     return wagons
@@ -130,11 +129,11 @@ def schedules(session, trains, routes, stops):
 
 
 @pytest.fixture
-def tickets(session, trains, routes, stops, schedules, wagons):
+def tickets(session, trains, routes, stops, schedules, wagons, user):
     tickets = [Ticket(departure_stop=stops[2].id, arrival_stop=stops[3].id, cost=34, wagon_id=wagons[0].id, place_num=2,
-                      schedule_id=schedules[0].id, is_booked=False),
+                      schedule_id=schedules[0].id, is_booked=False, user_id = user.id),
                Ticket(departure_stop=stops[1].id, arrival_stop=stops[3].id, cost=34, wagon_id=wagons[1].id, place_num=3,
-                      schedule_id=schedules[0].id, is_booked=False)]
+                      schedule_id=schedules[0].id, is_booked=False, user_id = user.id)]
     session.add_all(tickets)
     session.commit()
     return schedules

@@ -72,6 +72,9 @@ class Station(Base):
     name = Column(String(50), nullable=False)
     province = Column(String(50), nullable=False)
 
+    def fullname(self):
+        return self.province + " " + self.name
+
 
 class Stop(Base):
     __tablename__ = "stops"
@@ -80,11 +83,13 @@ class Stop(Base):
     route_id = Column(Integer, ForeignKey('routes.id'))
     arriving = Column(DateTime, nullable=True)
     departure = Column(DateTime, nullable=True)
+    cost = Column(Integer)
 
 
 class Ticket(Base):
     __tablename__ = "tickets"
     id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
     departure_stop = Column(Integer, ForeignKey('stops.id'))
     arrival_stop = Column(Integer, ForeignKey('stops.id'))
     cost = Column(Integer, nullable=False)

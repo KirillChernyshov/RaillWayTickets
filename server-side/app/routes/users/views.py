@@ -2,7 +2,9 @@ from flask import Blueprint, jsonify
 from app import logger, session, docs
 from app.schemas import UserSchema, AuthSchema
 from flask_apispec import use_kwargs, marshal_with
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.model import User
+
 
 users = Blueprint('users', __name__)
 
@@ -34,9 +36,21 @@ def login(**kwargs):
         logger.warning(
             f'login with email {kwargs["email"]} failed with errors: {e}')
         return {'message': str(e)}, 400
-
     return {'access_token': token , 'firstname': user.firstname, 'lastname': user.lastname, 'role': user.role}
+
+
+
+@users.errorhandler(422)
+def handle_error(err):
+    headers = err.data.get('headers', None)
+    messages = err.data.get('messages', ['Invalid Request.'])
+    logger.warning(f'Invalid input params: {messages}')
+    if headers:
+        return jsonify({'message': messages}), 400, headers
+    else:
+        return jsonify({'message': messages}), 400
 
 
 docs.register(register, blueprint='users')
 docs.register(login, blueprint='users')
+

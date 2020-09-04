@@ -66,7 +66,7 @@ logger = setup_logger()
 
 
 @app.teardown_appcontext
-def shutdown_session(exception=None):
+def shutdown_session(exception = None):
     session.remove()
 
 
@@ -75,9 +75,11 @@ from app.routes import test
 
 from .routes.users.views import users
 from .routes.main.views import main
+from .routes.profile.views import profile
 
 app.register_blueprint(users)
 app.register_blueprint(main)
+app.register_blueprint(profile)
 
 docs.init_app(app)
 jwt.init_app(app)

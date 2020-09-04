@@ -26,6 +26,11 @@ class AuthSchema(Schema):
     role = fields.String(dump_only=True)
 
 
+class SeatTypeInfoSchema(Schema):
+    type_name = fields.String(required=True)
+    num_of_places = fields.Integer(required=True)
+    cost = fields.Integer(required=True)
+
 class RouteInfoSchema(Schema):
     departure_time = fields.DateTime(required=True)
     arrival_time = fields.DateTime(required=True)
@@ -35,16 +40,16 @@ class RouteInfoSchema(Schema):
     dep_station_name = fields.String(required=True)
     arr_station_name = fields.String(required=True)
     route_name = fields.String(required=True)
-    places = fields.String(required=True)
+    seats_info = fields.List(fields.Nested(SeatTypeInfoSchema),required=True)
     cost = fields.String(required=True)
 
 
-class RoutesSearchResponseScheema(Schema):
+class RoutesSearchResponseSchema(Schema):
     are_found = fields.Boolean(required=True)
     routes = fields.List(fields.Nested(RouteInfoSchema), required=True, allow_none=True)
 
 
-class SearchSchema(Schema):
+class RouteSearchSchema(Schema):
     departure_province_name = fields.String(required=True)
     arrival_province_name = fields.String(required=True)
     arrival_date = fields.DateTime(required=True)
@@ -59,6 +64,19 @@ class WagonInfoSchema(Schema):
 class TrainPlacesInfoSchema(Schema):
     train_id = fields.Integer(requied=True)
     wagons_info = fields.List(fields.Nested(WagonInfoSchema), required=True)
+
+class TicketInfoSchema(Schema):
+    ticket_id = fields.Integer(required=True)
+    route_name = fields.String(required=True)
+    dep_station_name = fields.String(required=True)
+    arr_station_name = fields.String(required=True)
+    departure_time = fields.DateTime(required=True)
+    arrival_time = fields.DateTime(required=True)
+    wagon_id = fields.Integer(required=True)
+    place = fields.Integer(required=True)
+    cost = fields.String(required=True)
+
+
 
 
 class TestClass():
