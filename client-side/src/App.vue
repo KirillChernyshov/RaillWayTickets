@@ -14,10 +14,13 @@
 import NavBar from '@/components/NavBar.vue'
 
 export default {
-  name: 'Home',
-  components: {
-    NavBar,
-  }
+    name: 'Home',
+    components: {
+        NavBar,
+    },
+    created() {
+        this.$store.commit('user/initUserData');
+    },
 }
 </script>
 

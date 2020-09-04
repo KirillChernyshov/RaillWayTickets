@@ -1,5 +1,6 @@
 env
 app/static
+db.sqlite
 
 /.idea
 /__pycache__

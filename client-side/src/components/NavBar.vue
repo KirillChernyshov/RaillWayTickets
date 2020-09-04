@@ -14,14 +14,14 @@
 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
 
-                    <b-nav-item href="/auth">Log In</b-nav-item>
-                    <b-nav-item-dropdown right>
+                    <b-nav-item v-if="!valid" href="/auth">Log In</b-nav-item>
+                    <b-nav-item-dropdown v-else right>
                     <!-- Using 'button-content' slot -->
                         <template v-slot:button-content>
-                            <em>User</em>
+                            <em>{{ name }}</em>
                         </template>
                         <b-dropdown-item href="#">Profile</b-dropdown-item>
-                        <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+                        <b-dropdown-item @click="clearUserData" >Sign Out</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>
@@ -30,8 +30,21 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
     name: "nav-bar",
+    computed: {
+        ...mapGetters('user', [
+            'valid',
+            'name',
+        ])
+    },
+    methods: {
+        ...mapMutations('user', [
+            'clearUserData',
+        ])
+    }
 }
 </script>
 
