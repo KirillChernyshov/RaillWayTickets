@@ -31,6 +31,16 @@ class SeatTypeInfoSchema(Schema):
     num_of_places = fields.Integer(required=True)
     cost = fields.Integer(required=True)
 
+class WagonSeatsInfoSchema(Schema):
+    wagon_num = fields.String(required=True)
+    type_name = fields.String(required=True)
+    empty_places = fields.List(fields.Integer,required=True)
+    cost = fields.Integer(required=True)
+
+class TrainSeatsResponse(Schema):
+    wagon_seats_info = fields.List(fields.Nested(WagonSeatsInfoSchema,required=True))
+
+
 class RouteInfoSchema(Schema):
     departure_time = fields.DateTime(required=True)
     arrival_time = fields.DateTime(required=True)
@@ -75,6 +85,12 @@ class TicketInfoSchema(Schema):
     wagon_id = fields.Integer(required=True)
     place = fields.Integer(required=True)
     cost = fields.String(required=True)
+
+class CitiesListSchema(Schema):
+    city_name = fields.String(required=True)
+
+
+
 
 
 
