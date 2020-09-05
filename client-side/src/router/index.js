@@ -32,6 +32,16 @@ const routes = [
                 next()
             }
         },
+    },
+    {
+        path: '/timetable',
+        name: 'timetable',
+        component: () => import('../views/Timetable.vue'),
+    },
+    {
+        path: '/profile',
+        name: 'profile',
+        component: () => import('../views/Profile.vue'),
     }
 ]
 

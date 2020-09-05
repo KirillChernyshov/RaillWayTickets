@@ -1,11 +1,13 @@
 from flask import render_template, Blueprint, jsonify, Flask, send_from_directory
 from app import logger, docs, session
+from flask_apispec.annotations import doc
 from sqlalchemy.orm import aliased
 from flask_apispec import use_kwargs, marshal_with
 from app.schemas import *
 from app.model import *
 from datetime import datetime
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from .route_search import *
 
 main = Blueprint('main', __name__)
 
@@ -30,6 +32,12 @@ def pingf_pong():
     return teststr
 
 
+@main.route('/cities', methods=['GET'])
+@marshal_with(CitiesListSchema(many=True))
+def get_cities():
+    cities = session.query(Station.province).group_by(Station.province)
+    return cities
+
 @main.route('/search', methods=['GET'])
 @use_kwargs(RouteSearchSchema)
 @marshal_with(RoutesSearchResponseSchema)
@@ -42,11 +50,42 @@ def get_schedules(**kwargs):
     else:
         return {'are_found': False}
 
+@main.route('/get_route_info',methods=['GET'])
+@doc(tag=['pet'], description='get empty seats on a train for a fragment of the schedule')
+@use_kwargs(RouteInfoSchema(only=['schedule_id','dep_stop_id', 'arr_stop_id']))
+@marshal_with(TrainSeatsResponse)
+def get_empty_places(**kwargs):
+    schedule = session.query(Schedule).get(kwargs.get('schedule_id'))
+    print(kwargs.get('schedule_id'))
+    arrival_stop = session.query(Stop).get(kwargs.get('dep_stop_id'))
+    print(kwargs.get('dep_stop_id'))
+    departure_stop = session.query(Stop).get(kwargs.get('arr_stop_id'))
+    print(kwargs.get('arr_stop_id'))
+    return get_detailed_seats_info(schedule, arrival_stop, departure_stop)
+
+@main.route('/book_ticket', methods=['POST'])
+@doc(tag=['pet'], description='for booking a ticket')
+@jwt_required
+@use_kwargs(TicketInfoSchema(exclude=['ticket_id']))
+def book_ticket(**kwargs):
+    user_id = get_jwt_identity()
+    ticket = Ticket(user_id, **kwargs)
+    session.add(ticket)
+    session.commit()
+    return 200
+
+docs.register(get_schedules, blueprint="main")
+docs.register(book_ticket, blueprint='main')
+docs.register(get_empty_places, blueprint='main')
+docs.register(get_schedules, blueprint='main')
+docs.register(get_cities, blueprint='main')
+
 
 def get_fit_routes(routes_info):
     routes = []
     for i in range(len(routes_info)):
-        seats_info = get_seats_info(routes_info[i][0], routes_info[i][2], routes_info[i][1])
+        train_struc, wagon_types = get_seats_info(routes_info[i][0], routes_info[i][2], routes_info[i][1])
+        seats_info = get_empty_train_seats_info(train_struc, wagon_types )
         if seats_info != {}:
             routes.append(serialize_fit_route(routes_info[0], seats_info))
     return routes
@@ -67,25 +106,34 @@ def serialize_fit_route(route_info, seats_info):
                                               'cost': type_info['cost']})
     return route_info_dict
 
-
-def get_all_routes(departure_province, arrival_province, arrival_time):
-    # departure_province = "Рязанская область"
-    # arrival_province = "Мордовия"
-    # arrival_time = datetime(2020, 10, 1, 4, 0)
-    dep_stop = aliased(Stop, name='dep_stop')
-    arr_stop = aliased(Stop, name='arr_stop')
-    dep_station = aliased(Station, name='dep_station')
-    arr_station = aliased(Station, name='arr_station')
-    routes_info = session.query(Schedule, dep_stop, arr_stop). \
-        join(dep_stop, dep_stop.route_id == Schedule.base_route_id). \
-        join(dep_station, dep_station.id == dep_stop.station_id).filter(dep_station.province == departure_province). \
-        join(arr_stop, arr_stop.route_id == Schedule.base_route_id). \
-        filter(arr_stop.id > dep_stop.id, arr_stop.arriving < arrival_time). \
-        join(arr_station, arr_station.id == arr_stop.station_id).filter(arr_station.province == arrival_province)
-    return routes_info
+def serialize_seats_info(wagons_stat, schedule, arr_stop, dep_stop):
+    empty_seats_info = []
+    for wagon_num, wagon_places in wagons_stat.items():
+        wagon_info = wagon_places
+        wagon_info.update({'wagon_num': wagon_num})
+        empty_seats_info.append(wagon_info)
+    arr_station_name = session.query(Station.name).filter(Station.id == arr_stop.station_id).one_or_none()
+    dep_station_name = session.query(Station.name).filter(Station.id == dep_stop.station_id).one_or_none()
+    route_name = session.query(BaseRoute.Name).one_or_none()
+    route_info_dict = {'wagon_seats_info': empty_seats_info}
+    return route_info_dict
 
 
 type_factors = {'Купе': 1.1, 'Плацкартовый': 0.75}
+
+
+def get_detailed_seats_info(schedule, arr_stop, dep_stop):
+    train_struc, wagon_types = get_seats_info(schedule, arr_stop, dep_stop)
+    wagons_stat = get_wagons_info(train_struc, wagon_types)
+    return serialize_seats_info(wagons_stat, schedule, arr_stop, dep_stop)
+
+
+
+def get_seats_info(schedule, arr_stop, dep_stop):
+    train_struc, wagon_types = get_train_struct(schedule.train_id)
+    mark_booked_seats(train_struc, schedule, arr_stop, dep_stop)
+    places_stat = get_empty_train_seats_info(train_struc, wagon_types)
+    return train_struc, wagon_types
 
 
 def get_train_struct(train_id):
@@ -99,19 +147,39 @@ def get_train_struct(train_id):
     return train_struct, wagon_types
 
 
-def get_seats_info(schedule, arr_stop, dep_stop):
-    train_struc, wagon_types = get_train_struct(schedule.train_id)
+def get_tickets(schedule_id):
+    tickets = session.query(Ticket).filter(Ticket.schedule_id)
+    return tickets
+
+
+def mark_booked_seats(train_struc, schedule, arr_stop, dep_stop):
     tickets = get_tickets(schedule.id)
     for ticket in tickets:
         if (((ticket.departure_stop < dep_stop.id) == (ticket.arrival_stop > arr_stop.id)) |
                 ((ticket.departure_stop < dep_stop.id) & (ticket.arrival_stop > dep_stop.id)) |
                 ((ticket.departure_stop < arr_stop.id) & (ticket.arrival_stop > arr_stop.id))):
-            train_struc[ticket.wagon_id][ticket.place_num] = False
-    empty_places = 0
+            train_struc[ticket.wagon_id][ticket.place_num-1] = False
+
+
+def get_wagons_info(train_struc, wagon_types):
     ride_cost = 4
-    places = list(train_struc.values())
+    wagons_stat = {}
+    for wagon_id, wagon_places in train_struc.items():
+        if wagons_stat.get(wagon_id) is None:
+            wagons_stat[wagon_id] = \
+                {'type_name': wagon_types[wagon_id],'empty_places': [], 'cost': ride_cost * type_factors[wagon_types[wagon_id]]}
+        for place_num in range(len(wagon_places)):
+            if wagon_places[place_num]:
+                wagons_stat[wagon_id]['empty_places'].append(place_num+1)
+        for wagon_num, wagon_stat in wagons_stat.items():
+            if len(wagon_stat['empty_places']) == 0:
+                wagons_stat.pop(wagon_stat)
+    return wagons_stat
+
+
+def get_empty_train_seats_info(train_struc, wagon_types):
     places_stat = {}
-    print(train_struc)
+    ride_cost = 4
     for wagon_id, wagon_places in train_struc.items():
         if places_stat.get(wagon_types[wagon_id]) is None:
             places_stat[wagon_types[wagon_id]] = \
@@ -122,33 +190,10 @@ def get_seats_info(schedule, arr_stop, dep_stop):
     for type_name, type_stat in places_stat.items():
         if type_stat['num_of_places'] == 0:
             places_stat.pop(type_name)
-
-    for i in range(len(places)):
-        for y in range(len(places[i])):
-            if places[i][y]:
-                empty_places += 1
-    # arr_station = session.query(Station.name).fliter(Station.id == arr_stop.station_id)
-    #     dep_station = session.query(Station.name).filter(Station.id == dep_stop.station_id)
-    #     route_name = session.query
-    #     routings.append([schedule.id, arr_station, dep_station,arr_stop.arriving, dep_stop.departure])
     return places_stat
 
 
-def get_tickets(schedule_id):
-    tickets = session.query(Ticket).filter(Ticket.schedule_id)
-    return tickets
 
 
-def get_places_plan(wagon_id, schedule, arr_stop, dep_stop):
-    train_struc, wagon_types = get_train_struct(schedule.train_id)
-    tickets = get_tickets(schedule.id)
-    for ticket in tickets:
-        if (((ticket.departure_stop < dep_stop.id) == (ticket.arrival_stop > arr_stop.id)) |
-                ((ticket.departure_stop < dep_stop.id) & (ticket.arrival_stop > dep_stop.id)) |
-                ((ticket.departure_stop < arr_stop.id) & (ticket.arrival_stop > arr_stop.id))):
-            train_struc[ticket.wagon_id][ticket.place_num] = False
-    return train_struc, wagon_types
 
 
-docs.register(get_schedules, blueprint="main")
-docs.register(pingf_pong, blueprint='main')

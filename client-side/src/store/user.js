@@ -1,4 +1,5 @@
-
+import { userTickets } from '../api/index.js'
+import axios from 'axios'
 
 export default {
     namespaced: true,
@@ -31,6 +32,9 @@ export default {
             for (let key of keys) {
                 state.local[key] = localStorage[key] = data[key];
             }
+
+            axios.defaults.headers.post['Bearer'] = localStorage.access_token;
+            axios.defaults.headers.get['Authorization'] = `Bearer ${localStorage.access_token}`;
         },
         clearUserData(state) {
             let keys = Object.keys(state.local);
@@ -49,9 +53,28 @@ export default {
                     return this.commit('user/clearUserData');
 
             this.commit('user/setUserData', localStorage);
-        }
+        },
     },
     actions: {
+        getUserTickets({ state }) {
+            userTickets()
+                .then(res => {
+                    console.log("userTickets", state);
+                    console.log(res.data);
+                    //router.push("/");
+                    //commit("user/setUserData", res.data, { root: true });
+                })
+                .catch(er => {
+                    console.log(er.response, er.response.status == 422);
+                    // if (er.response.status == 400)
+                    //     state.error = "Данный почтовый адрес уже занят! :(";
+                    //     state.waiting = false;
+                    //
+                    //     setTimeout(() => {
+                    //         state.error = "";
+                    //     }, 10000);
+                })
+        },
 
     }
 }

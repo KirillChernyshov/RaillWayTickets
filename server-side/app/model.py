@@ -1,5 +1,5 @@
 from app import db, session, Base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean, UniqueConstraint
 from sqlalchemy.orm import relationship
 from flask_jwt_extended import create_access_token
 from datetime import timedelta
@@ -71,6 +71,7 @@ class Station(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     province = Column(String(50), nullable=False)
+    uniq_name = UniqueConstraint('name','province')
 
     def fullname(self):
         return self.province + " " + self.name
@@ -98,3 +99,14 @@ class Ticket(Base):
     schedule_id = Column(Integer, ForeignKey('schedules.id'))
     is_booked = Column(Boolean, nullable=False)
     book_end_date = Column(DateTime, nullable=True)
+
+    def __init__(self, user_id, **kwargs):
+        self.user_id = user_id
+        self.departure_stop = kwargs.get('departure_stop')
+        self.arrival_stop = kwargs.get('arrival_stop')
+        self.cost = kwargs.get('cost')
+        self.wagon_id = kwargs.get('wagon_id')
+        self.place_num = kwargs.get('place_num')
+        self.schedule_id = kwargs.get('schedule_id')
+        self.is_booked = False
+        self.book_end_date = None

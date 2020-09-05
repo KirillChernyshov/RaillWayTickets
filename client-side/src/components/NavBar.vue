@@ -7,7 +7,7 @@
 
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
-                    <b-nav-item href="#">Расписание</b-nav-item>
+                    <b-nav-item href="/timetable">Расписание</b-nav-item>
                     <!-- <b-nav-item href="#" disabled>Disabled</b-nav-item> -->
                 </b-navbar-nav>
 
@@ -20,7 +20,7 @@
                         <template v-slot:button-content>
                             <em>{{ name }}</em>
                         </template>
-                        <b-dropdown-item href="#">Profile</b-dropdown-item>
+                        <b-dropdown-item href="/profile">Profile</b-dropdown-item>
                         <b-dropdown-item @click="clearUserData" >Sign Out</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>

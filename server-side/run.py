@@ -33,9 +33,9 @@ def mockup():
     trains = [Train()]
     session.add_all(trains)
     session.commit()
-    wagons = [Wagon(train_id=trains[0].id, type='type-1', places_count=5),
-              Wagon(train_id=trains[0].id, type='type-2', places_count=4),
-              Wagon(train_id=trains[0].id, type='type-3', places_count=2)]
+    wagons = [Wagon(train_id=trains[0].id, type='Купе', places_count=5),
+              Wagon(train_id=trains[0].id, type='Плацкартовый', places_count=4),
+              Wagon(train_id=trains[0].id, type='Купе', places_count=2)]
     session.add_all(wagons)
     session.commit()
     schedules = [Schedule(train_id=trains[0].id, base_route_id=routes[0].id, departure_time=stops[0].departure)]

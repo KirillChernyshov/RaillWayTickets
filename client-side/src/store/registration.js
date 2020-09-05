@@ -10,7 +10,6 @@ export default {
     actions: {
         registration({ state, commit }, data) {
             state.waiting = true;
-            data;
             registration(data)
                 .then(res => {
                     console.log("registration");
