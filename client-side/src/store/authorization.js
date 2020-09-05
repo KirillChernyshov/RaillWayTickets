@@ -1,4 +1,5 @@
 import { authorization } from '../api/index.js'
+import router from '../router'
 
 export default {
     namespaced: true,
@@ -7,17 +8,18 @@ export default {
         error: "",
     },
     actions: {
-        authorization({ state }, data) {
+        authorization({ state, commit }, data) {
             state.waiting = true;
             data;
-            authorization({ email: "test@test.ru", password: "11211121"})
+            authorization(data)
                 .then(res => {
-                    console.log(res.data);
+                    console.log("authorization");
+                    router.push("/");
+                    commit("user/setUserData", res.data, { root: true });
                 })
                 .catch(er => {
-                    console.log(er.response, er.response.status == 422);
-                    if (er.response.status == 422)
-                        state.error = "Данный пользователь уже зарегистрирован!";
+                    if (er.response.status == 400)
+                        state.error = "Не верный логин или пароль!";
                         state.waiting = false;
 
                         setTimeout(() => {

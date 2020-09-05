@@ -1,22 +1,40 @@
 <template>
     <div class="home">
+        <div v-if="valid" class="head">Здравствуйте, {{ name }}!</div>
         <div class="head">Добро пожаловать на платформу RaillWayTickets!</div>
         <div class="body">
             Данная платформа позволяет просматривать расписание маршрутов поездов.
             <br />
-            Для бронирования мест необходимо <b-link href="/auth">авторизоваться</b-link> или <b-link href="/reg">зарегистрироваться</b-link>.
+            Для бронирования мест
+            <span v-if="!valid">
+                необходимо
+                <b-link href="/auth">авторизоваться</b-link>
+                или
+                <b-link href="/reg">зарегистрироваться</b-link>.
+            </span>
+            <span v-else>
+                перейдите на вкладку с
+                <b-link href="/reg">расписанием</b-link>.
+            </span>
         </div>
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import { mapGetters } from 'vuex'
 
 export default {
-  name: 'home',
-  components: {
+    name: 'home',
+    computed: {
+        ...mapGetters('user', [
+            'valid',
+            'name'
+        ]),
+    },
+    components: {
 
-  }
+    }
 }
 </script>
 

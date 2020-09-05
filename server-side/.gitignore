@@ -1,5 +1,6 @@
 env
 app/static
+db.sqlite
 
 
 
@@ -10,4 +11,5 @@ app/static
 /alembic/*
 alembic.ini
 log/api.log
+
 *.mwb
