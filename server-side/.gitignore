@@ -1,6 +1,8 @@
 env
 app/static
 
+
+
 /.idea
 /__pycache__
 /**/__pycache__/*
@@ -8,3 +10,4 @@ app/static
 /alembic/*
 alembic.ini
 log/api.log
+*.mwb

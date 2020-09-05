@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, send_from_directory, render_template, request
 from apispec.ext.marshmallow import MarshmallowPlugin
+from apispec_webframeworks.flask import FlaskPlugin
 from apispec import APISpec
 from flask_apispec.extension import  FlaskApiSpec
 from .schemas import UserSchema, AuthSchema, TestClass, TestSchema
@@ -35,17 +36,33 @@ Base.query = session.query_property()
 
 jwt = JWTManager(app)
 
+
 docs = FlaskApiSpec()
 
-app.config.update({
-    'APISPEC_SPEC': APISpec(
+
+spec = APISpec(
         title='railwaytickets',
         version='v1',
-        openapi_version='2.0',
+        openapi_version='2.0.0',
         plugins=[MarshmallowPlugin()],
-    ),
+    )
+
+
+
+jwt_scheme = {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"}
+
+
+
+
+spec.components.security_scheme("jwt", jwt_scheme)
+
+
+app.config.update({
+    'APISPEC_SPEC': spec ,
     'APISPEC_SWAGGER_URL': '/swagger/'
 })
+
+
 
 
 def setup_logger():

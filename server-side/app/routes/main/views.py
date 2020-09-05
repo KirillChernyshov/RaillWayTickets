@@ -74,6 +74,7 @@ def book_ticket(**kwargs):
     session.commit()
     return 200
 
+
 docs.register(get_schedules, blueprint="main")
 docs.register(book_ticket, blueprint='main')
 docs.register(get_empty_places, blueprint='main')
