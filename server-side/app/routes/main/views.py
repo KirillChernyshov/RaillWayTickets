@@ -35,8 +35,8 @@ def pingf_pong():
 @main.route('/cities', methods=['GET'])
 @marshal_with(CitiesListSchema(many=True))
 def get_cities():
-    cities = session.query(Station.province).group_by(Station.province)
-    return cities
+    cities = session.query(Station.province).group_by(Station.province).all()
+    return [{'city_name': city[0]} for city in cities]
 
 @main.route('/search', methods=['GET'])
 @use_kwargs(RouteSearchSchema)
