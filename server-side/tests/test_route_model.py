@@ -41,7 +41,7 @@ def test_route_search(client, session, schedules , tickets, trains, routes, stop
                                          'arrival_date': datetime.isoformat(datetime(2020, 10, 1, 8, 0))})
     assert result.status == '200 OK'
     assert result.get_json().get('are_found')
-    assert len(result.get_json().get('routes')) == 2
+    assert len(result.get_json().get('routes')) == 3
 
 
 
