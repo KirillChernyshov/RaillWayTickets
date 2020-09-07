@@ -9,3 +9,7 @@ export function registration (data) {
 export function authorization (data) {
     return axios.post(`${url}/login`, data)
 }
+
+export function userTickets() {
+    return axios.get(`${url}/user_tickets`);
+}

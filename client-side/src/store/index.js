@@ -3,12 +3,17 @@ import Vuex from 'vuex'
 
 import auth from './authorization.js'
 import reg from './registration.js'
+import user from './user.js'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-  },
+    state: {
+        hi: "hi",
+    },
+    getters: {
+        
+    },
   mutations: {
   },
   actions: {
@@ -16,5 +21,6 @@ export default new Vuex.Store({
   modules: {
       auth,
       reg,
+      user,
   }
-})
+});

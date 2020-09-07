@@ -1,4 +1,5 @@
 import { registration } from '../api/index.js'
+import router from '../router'
 
 export default {
     namespaced: true,
@@ -7,17 +8,18 @@ export default {
         error: "",
     },
     actions: {
-        registration({ state }, data) {
+        registration({ state, commit }, data) {
             state.waiting = true;
-            data;
-            registration({ name: "test", email: "test@test.ru", password: "11211121"})
+            registration(data)
                 .then(res => {
-                    console.log(res.data);
+                    console.log("registration");
+                    router.push("/");
+                    commit("user/setUserData", res.data, { root: true });
                 })
                 .catch(er => {
                     console.log(er.response, er.response.status == 422);
-                    if (er.response.status == 422)
-                        state.error = "Данный пользователь уже зарегистрирован!";
+                    if (er.response.status == 400)
+                        state.error = "Данный почтовый адрес уже занят! :(";
                         state.waiting = false;
 
                         setTimeout(() => {

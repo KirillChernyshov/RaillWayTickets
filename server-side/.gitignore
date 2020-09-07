@@ -1,5 +1,8 @@
 env
 app/static
+db.sqlite
+
+
 
 /.idea
 /__pycache__
@@ -8,3 +11,5 @@ app/static
 /alembic/*
 alembic.ini
 log/api.log
+
+*.mwb

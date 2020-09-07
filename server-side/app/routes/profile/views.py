@@ -32,18 +32,18 @@ class UsersTickets(BaseView):
     @doc(tag=['pet'], description='get tcikets of a user')
     @jwt_required
     @marshal_with(TicketInfoSchema(many=True))
-    def get(self, user_id):
+    def get(self):
         user_id = get_jwt_identity()
         try:
             user = User.query.get(user_id)
             if not user:
                 raise Exception('User not found')
-            tickets = Ticket.query().filter(user_id=user_id)
+            tickets = session.query(Ticket).filter(Ticket.user_id==user.id).all()
         except Exception as e:
             logger.warning(
                 f'user:{user_id} - failed to read profile: {e}')
             return {'message': str(e)}, 400
-        return UserInfoView.prepare_to_serialize(tickets)
+        return UsersTickets.prepare_to_serialize(tickets)
 
     @jwt_required
     @doc(tag=['pet'], description='desc')
@@ -65,11 +65,11 @@ class UsersTickets(BaseView):
                                 'dep_station_name': dep_station.fullname(),
                                 'arr_station_name': arr_station.fullname(),
                                 'departure_time': dep_station_stop.departure,
-                                'arrival_time': arr_station_stop.arrival,
+                                'arrival_time': arr_station_stop.arriving,
                                 'wagon_id': ticket.wagon_id,
                                 'place': ticket.place_num,
                                 'cost': ticket.cost})
-            return ticket_data
+        return ticket_data
 
 #class
 

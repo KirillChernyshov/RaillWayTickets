@@ -70,3 +70,70 @@ Traceback (most recent call last):
   File "c:\program files\python38\lib\site-packages\marshmallow\utils.py", line 192, in isoformat
     return datetime.isoformat()
 AttributeError: 'str' object has no attribute 'isoformat'
+2020-09-05 21:30:04,433:app:WARNING:user:1 - failed to read profile: 'Query' object is not callable
+2020-09-05 21:30:38,697:app:WARNING:user:1 - failed to read profile: 'Query' object is not callable
+2020-09-05 21:31:27,206:app:WARNING:user:1 - failed to read profile: filter() got an unexpected keyword argument 'user_id'
+2020-09-05 21:32:34,024:app:ERROR:Exception on /user_tickets [GET]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\views.py", line 163, in dispatch_request
+    return meth(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\profile\views.py", line 46, in get
+    return UserInfoView.prepare_to_serialize(tickets)
+AttributeError: type object 'UserInfoView' has no attribute 'prepare_to_serialize'
+2020-09-05 21:38:09,616:app:ERROR:Exception on /user_tickets [GET]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\views.py", line 89, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\views.py", line 163, in dispatch_request
+    return meth(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\profile\views.py", line 46, in get
+    return UsersTickets.prepare_to_serialize(tickets)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\profile\views.py", line 68, in prepare_to_serialize
+    'arrival_time': arr_station_stop.arrival,
+AttributeError: 'Stop' object has no attribute 'arrival'
