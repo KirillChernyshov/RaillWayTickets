@@ -19,5 +19,5 @@ export function getCities() {
 }
 
 export function searchRoutes(data) {
-    return axios.get(`${url}/search`, { data: data });
+    return axios.post(`${url}/search`, data);
 }
