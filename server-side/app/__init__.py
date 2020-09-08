@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, send_from_directory, render_template, request
 from apispec.ext.marshmallow import MarshmallowPlugin
-from apispec_webframeworks.flask import FlaskPlugin
+#from apispec_webframeworks.flask import FlaskPlugin
 from apispec import APISpec
 from flask_apispec.extension import  FlaskApiSpec
 from .schemas import UserSchema, AuthSchema, TestClass, TestSchema
@@ -12,8 +12,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from flask_cors import CORS
 from .config import Config
+from app.model import *
+from datetime import datetime
 import logging
-
+import threading
+import atexit
 
 
 app = Flask(__name__,
@@ -87,6 +90,16 @@ def shutdown_session(exception = None):
     session.remove()
 
 
+session_lock = threading.Lock()
+database_cleaning_thread =  threading.Thread()
+
+def database_clean(name):
+    logger.info('thread %s begins the proccess')
+    now = datetime.now()
+    session.query(Ticket.id)
+    logger.info('thread %s proccess completed')
+
+
 from app.routes import test
 
 
@@ -100,4 +113,6 @@ app.register_blueprint(profile)
 
 docs.init_app(app)
 jwt.init_app(app)
+
+
 

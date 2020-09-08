@@ -9,6 +9,7 @@ from datetime import datetime
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from .route_search import *
 
+
 main = Blueprint('main', __name__)
 
 
