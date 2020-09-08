@@ -100,7 +100,7 @@ def serialize_fit_route(route_info, seats_info):
                        'arrival_time': route_info[2].arriving,
                        'schedule_id': route_info[0].id, 'dep_stop_id': route_info[1].station_id,
                        'arr_stop_id': route_info[2].station_id, 'arr_station_name': arr_station_name[0],
-                       'dep_station_name': dep_station_name[0], 'route_name': route_name}
+                       'dep_station_name': dep_station_name[0], 'route_name': route_name[0]}
     route_info_dict['seats_info'] = []
     for type_name, type_info in seats_info.items():
         route_info_dict['seats_info'].append({'type_name': type_name, 'num_of_places': type_info['num_of_places'],
