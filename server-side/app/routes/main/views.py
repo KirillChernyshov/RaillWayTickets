@@ -38,7 +38,7 @@ def get_cities():
     cities = session.query(Station.province).group_by(Station.province).all()
     return [{'city_name': city[0]} for city in cities]
 
-@main.route('/search', methods=['GET'])
+@main.route('/search', methods=['POST'])
 @use_kwargs(RouteSearchSchema)
 @marshal_with(RoutesSearchResponseSchema)
 def get_schedules(**kwargs):
