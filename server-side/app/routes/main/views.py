@@ -38,6 +38,7 @@ def get_cities():
     cities = session.query(Station.province).group_by(Station.province).all()
     return [{'city_name': city[0]} for city in cities]
 
+
 @main.route('/search', methods=['GET'])
 @use_kwargs(RouteSearchSchema)
 @marshal_with(RoutesSearchResponseSchema)
@@ -50,9 +51,10 @@ def get_schedules(**kwargs):
     else:
         return {'are_found': False}
 
-@main.route('/get_route_info',methods=['GET'])
+
+@main.route('/get_route_info', methods=['GET'])
 @doc(tag=['pet'], description='get empty seats on a train for a fragment of the schedule')
-@use_kwargs(RouteInfoSchema(only=['schedule_id','dep_stop_id', 'arr_stop_id']))
+@use_kwargs(RouteInfoSchema(only=['schedule_id', 'dep_stop_id', 'arr_stop_id']))
 @marshal_with(TrainSeatsResponse)
 def get_empty_places(**kwargs):
     schedule = session.query(Schedule).get(kwargs.get('schedule_id'))
@@ -63,13 +65,26 @@ def get_empty_places(**kwargs):
     print(kwargs.get('arr_stop_id'))
     return get_detailed_seats_info(schedule, arrival_stop, departure_stop)
 
+
 @main.route('/book_ticket', methods=['POST'])
 @doc(tag=['pet'], description='for booking a ticket')
 @jwt_required
-@use_kwargs(TicketInfoSchema(exclude=['ticket_id']))
+@use_kwargs(TicketBookingSchema)
 def book_ticket(**kwargs):
     user_id = get_jwt_identity()
-    ticket = Ticket(user_id, **kwargs)
+    now_time = datetime.now()
+    train_dep_time = session.query(Schedule).get(kwargs.get('schedule_id')).departure_time
+    late_booking_limit = train_dep_time - timedelta(days=4)
+    #late_booking_limit = train_dep_time - timedelta(days=4)
+    if(late_booking_limit<now_time):
+        print(train_dep_time)
+        print(now_time)
+        return 409
+    early_booking_limit = now_time + timedelta(days=30)
+    book_end_date = min(early_booking_limit, late_booking_limit)
+    print(book_end_date)
+    print(kwargs.get('place'))
+    ticket = Ticket(user_id=user_id, book_end_date=book_end_date, **kwargs)
     session.add(ticket)
     session.commit()
     return 200
@@ -86,7 +101,7 @@ def get_fit_routes(routes_info):
     routes = []
     for i in range(len(routes_info)):
         train_struc, wagon_types = get_seats_info(routes_info[i][0], routes_info[i][2], routes_info[i][1])
-        seats_info = get_empty_train_seats_info(train_struc, wagon_types )
+        seats_info = get_empty_train_seats_info(train_struc, wagon_types)
         if seats_info != {}:
             routes.append(serialize_fit_route(routes_info[0], seats_info))
     return routes
@@ -95,7 +110,7 @@ def get_fit_routes(routes_info):
 def serialize_fit_route(route_info, seats_info):
     arr_station_name = session.query(Station.name).filter(Station.id == route_info[2].station_id).one_or_none()
     dep_station_name = session.query(Station.name).filter(Station.id == route_info[1].station_id).one_or_none()
-    route_name = session.query(BaseRoute.Name).one_or_none()
+    route_name = session.query(BaseRoute.name).one_or_none()
     route_info_dict = {'departure_time': route_info[1].departure,
                        'arrival_time': route_info[2].arriving,
                        'schedule_id': route_info[0].id, 'dep_stop_id': route_info[1].station_id,
@@ -107,6 +122,7 @@ def serialize_fit_route(route_info, seats_info):
                                               'cost': type_info['cost']})
     return route_info_dict
 
+
 def serialize_seats_info(wagons_stat, schedule, arr_stop, dep_stop):
     empty_seats_info = []
     for wagon_num, wagon_places in wagons_stat.items():
@@ -115,7 +131,7 @@ def serialize_seats_info(wagons_stat, schedule, arr_stop, dep_stop):
         empty_seats_info.append(wagon_info)
     arr_station_name = session.query(Station.name).filter(Station.id == arr_stop.station_id).one_or_none()
     dep_station_name = session.query(Station.name).filter(Station.id == dep_stop.station_id).one_or_none()
-    route_name = session.query(BaseRoute.Name).one_or_none()
+    route_name = session.query(BaseRoute.name).one_or_none()
     route_info_dict = {'wagon_seats_info': empty_seats_info}
     return route_info_dict
 
@@ -127,7 +143,6 @@ def get_detailed_seats_info(schedule, arr_stop, dep_stop):
     train_struc, wagon_types = get_seats_info(schedule, arr_stop, dep_stop)
     wagons_stat = get_wagons_info(train_struc, wagon_types)
     return serialize_seats_info(wagons_stat, schedule, arr_stop, dep_stop)
-
 
 
 def get_seats_info(schedule, arr_stop, dep_stop):
@@ -159,7 +174,7 @@ def mark_booked_seats(train_struc, schedule, arr_stop, dep_stop):
         if (((ticket.departure_stop < dep_stop.id) == (ticket.arrival_stop > arr_stop.id)) |
                 ((ticket.departure_stop < dep_stop.id) & (ticket.arrival_stop > dep_stop.id)) |
                 ((ticket.departure_stop < arr_stop.id) & (ticket.arrival_stop > arr_stop.id))):
-            train_struc[ticket.wagon_id][ticket.place_num-1] = False
+            train_struc[ticket.wagon_id][ticket.place_num - 1] = False
 
 
 def get_wagons_info(train_struc, wagon_types):
@@ -168,10 +183,11 @@ def get_wagons_info(train_struc, wagon_types):
     for wagon_id, wagon_places in train_struc.items():
         if wagons_stat.get(wagon_id) is None:
             wagons_stat[wagon_id] = \
-                {'type_name': wagon_types[wagon_id],'empty_places': [], 'cost': ride_cost * type_factors[wagon_types[wagon_id]]}
+                {'type_name': wagon_types[wagon_id], 'empty_places': [],
+                 'cost': ride_cost * type_factors[wagon_types[wagon_id]]}
         for place_num in range(len(wagon_places)):
             if wagon_places[place_num]:
-                wagons_stat[wagon_id]['empty_places'].append(place_num+1)
+                wagons_stat[wagon_id]['empty_places'].append(place_num + 1)
         for wagon_num, wagon_stat in wagons_stat.items():
             if len(wagon_stat['empty_places']) == 0:
                 wagons_stat.pop(wagon_stat)
@@ -192,9 +208,3 @@ def get_empty_train_seats_info(train_struc, wagon_types):
         if type_stat['num_of_places'] == 0:
             places_stat.pop(type_name)
     return places_stat
-
-
-
-
-
-

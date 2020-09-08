@@ -61,7 +61,7 @@ class UsersTickets(BaseView):
             dep_station = Station.query.get(dep_station_stop.station_id)
             arr_station = Station.query.get(arr_station_stop.station_id)
             ticket_data.append({'ticket_id': ticket.id,
-                                'route_name': route.Name,
+                                'route_name': route.name,
                                 'dep_station_name': dep_station.fullname(),
                                 'arr_station_name': arr_station.fullname(),
                                 'departure_time': dep_station_stop.departure,

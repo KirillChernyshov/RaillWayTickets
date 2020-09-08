@@ -14,7 +14,7 @@ def test_stations(stations, session):
 def test_route(routes, stops, session):
     db_route = session.query(BaseRoute).get(1)
     db_stops = session.query(Stop).all()
-    assert db_route.Name == routes[0].Name
+    assert db_route.Name == routes[0].name
     assert db_stops[0].route_id == stops[0].route_id
     assert db_stops[0].departure == stops[0].departure
 

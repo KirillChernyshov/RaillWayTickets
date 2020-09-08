@@ -18,7 +18,7 @@ def mockup():
                 Station(name="Ковылкиноб", province="Мордовия")]
     session.add_all(stations)
     session.commit()
-    routes = [BaseRoute(Name="Рязань - Мордовия")]
+    routes = [BaseRoute(name="Рязань - Мордовия")]
     session.add_all(routes)
     session.commit()
     stops = [Stop(station_id=stations[0].id, route_id=routes[0].id, departure=datetime(2020, 10, 1, 0, 0)),
@@ -41,9 +41,9 @@ def mockup():
     schedules = [Schedule(train_id=trains[0].id, base_route_id=routes[0].id, departure_time=stops[0].departure)]
     session.add_all(schedules)
     session.commit()
-    tickets = [Ticket(departure_stop=stops[2].id, arrival_stop=stops[3].id, cost=34, wagon_id=wagons[0].id, place_num=2,
+    tickets = [Ticket(departure_stop=stops[2].id, arrival_stop=stops[3].id, cost=34, wagon_id=wagons[0].id, place=2,
                       schedule_id=schedules[0].id, is_booked=False, user_id = users[0].id),
-               Ticket(departure_stop=stops[1].id, arrival_stop=stops[3].id, cost=34, wagon_id=wagons[1].id, place_num=3,
+               Ticket(departure_stop=stops[1].id, arrival_stop=stops[3].id, cost=34, wagon_id=wagons[1].id, place=3,
                       schedule_id=schedules[0].id, is_booked=False, user_id = users[0].id)]
     session.add_all(tickets)
     session.commit()
