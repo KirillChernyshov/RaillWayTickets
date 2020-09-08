@@ -103,6 +103,7 @@ export default {
                     if (item.value != this.form["checkpass"].value) {
                         item.valid = false;
                         this.form["checkpass"].valid = false;
+                        count++;
                     } else {
                         item.valid = null;
                         this.form["checkpass"].valid = null;
