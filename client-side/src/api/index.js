@@ -17,3 +17,7 @@ export function userTickets() {
 export function getCities() {
     return axios.get(`${url}/cities`);
 }
+
+export function searchRoutes(data) {
+    return axios.get(`${url}/search`, { data: data });
+}
