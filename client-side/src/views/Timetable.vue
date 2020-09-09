@@ -5,7 +5,7 @@
                 label="Станция отбытия"
             >
                 <b-form-select
-                    v-model="arr_station_name"
+                    v-model="dep_station_name"
                     :options="cities"
                     class="mb-2 mr-sm-2 mb-sm-0"
                 ></b-form-select>
@@ -15,7 +15,7 @@
                 label="Станция прибытия"
             >
                 <b-form-select
-                    v-model="dep_station_name"
+                    v-model="arr_station_name"
                     :options="cities"
                     class="mb-2 mr-sm-2 mb-sm-0"
                 ></b-form-select>
@@ -38,7 +38,26 @@
             </b-form-group>
             <b-button class="btn" @click="search()">Поиск</b-button>
         </b-form>
-        <div>{{ cities }}</div>
+
+        <b-table :busy="load" sticky-header class="align-left routes" striped hover :items="routes" :fields="fields">
+            <template v-show="false" v-slot:cell(actions)="row">
+                <b-button
+                    size="sm"
+                    variant="info"
+                    @click="cancelReservation(row.item.ticket_id)"
+                    class="mr-2"
+                >
+                  Бронировать билет
+                </b-button>
+            </template>
+            <template v-slot:table-busy>
+                <div class="text-center text-info my-2">
+                    <b-spinner class="align-middle"></b-spinner>
+                    <strong> Загрузка...</strong>
+                </div>
+            </template>
+        </b-table>
+
     </div>
 </template>
 
@@ -52,14 +71,49 @@ export default {
         arr_station_name: null,
         dep_station_name: null,
         date: moment().add(1, 'day').format('YYYY-MM-DD'),
-        time: moment().format('hh:mm:ss'),
+        time: moment().format('HH:mm:ss'),
     }),
     computed: {
         ...mapState({
             cities: state => state.timetable.cities,
+            load: state => state.timetable.load,
+            routes: state => state.timetable.routes,
+            role: state => state.user.local.role,
         }),
         rDate() {
             return moment(this.date).add(this.time).format();
+        },
+        fields() {
+            return [
+                {
+                    key: "dep_station_name",
+                    label: "Станция отбытия",
+                },
+                {
+                    key: "departure_time",
+                    label: "Время отбытия"
+                },
+                {
+                    key: "arr_station_name",
+                    label: "Станция прибытия"
+                },
+                {
+                    key: "arrival_time",
+                    label: "Время прибытия"
+                },
+                {
+                    key: "route_name",
+                    label: "Маршрут"
+                },
+                {
+                    key: "places",
+                    label: "Места"
+                },
+                (this.role) ? {
+                    key: "actions",
+                    label: "Действия"
+                } : {}
+            ];
         }
     },
     methods: {
@@ -97,6 +151,10 @@ export default {
 
     .timetable .search .btn {
         margin: auto auto 0 0;
+    }
+
+    .timetable .routes {
+        max-height: 70vh;
     }
 
 </style>
