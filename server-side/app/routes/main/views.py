@@ -106,7 +106,6 @@ def handle_error(err):
 docs.register(get_schedules, blueprint="main")
 docs.register(book_ticket, blueprint='main')
 docs.register(get_empty_places, blueprint='main')
-docs.register(get_schedules, blueprint='main')
 docs.register(get_cities, blueprint='main')
 
 

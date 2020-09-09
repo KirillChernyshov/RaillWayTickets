@@ -61,7 +61,7 @@ def handle_error(err):
     else:
         return jsonify({'message': messages}), 400
 
-
+docs.register(logout, blueprint='users')
 docs.register(register, blueprint='users')
 docs.register(login, blueprint='users')
 

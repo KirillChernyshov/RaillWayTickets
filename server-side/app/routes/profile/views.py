@@ -128,6 +128,9 @@ def verify_ticket(**kwargs):
     return {"msg": "Successfully verified ticket"}, 200
 
 
+docs.register(verify_ticket, blueprint='profile')
+docs.register(delete_ticket, blueprint='profile')
+docs.register(search_tickets, blueprint='profile')
 UserInfoView.register(profile, docs, '/profile', 'userinfoview')
 UsersTickets.register(profile, docs, '/user_tickets', 'userstickets')
 

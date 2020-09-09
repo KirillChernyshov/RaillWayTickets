@@ -23,7 +23,7 @@ class StoppableThread(threading.Thread):
 
     def run(self):
         while self.stopped() is False:
-            logger.info('thread %s begins the proccess')
+            logger.info('thread begins the proccess')
             session_lock.acquire()
             now = datetime.now()
             tickets_to_delete = session.query(Ticket).filter(Ticket.book_end_date > now).all()
@@ -33,8 +33,9 @@ class StoppableThread(threading.Thread):
                 session.delete(ticket)
             session.commit()
             session_lock.release()
-            logger.info('thread %s proccess completed')
+            logger.info('thread proccess completed')
             self._stop_event.wait(4)
+        logger.info('dataclean thread has stopped')
 
 
 # app = create_app()
@@ -82,7 +83,7 @@ def mockup():
     session.add_all(tickets)
     session.commit()
 
-
+#
 if __name__ == '__main__':
     database_cleaning_thread = StoppableThread()
     database_cleaning_thread.start()
