@@ -50,7 +50,7 @@ def get_schedules(**kwargs):
     else:
         return {'are_found': False}
 
-@main.route('/get_route_info',methods=['GET'])
+@main.route('/get_route_info',methods=['POST'])
 @doc(tag=['pet'], description='get empty seats on a train for a fragment of the schedule')
 @use_kwargs(RouteInfoSchema(only=['schedule_id','dep_stop_id', 'arr_stop_id']))
 @marshal_with(TrainSeatsResponse)
