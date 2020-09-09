@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, send_from_directory, render_template, request
 from apispec.ext.marshmallow import MarshmallowPlugin
-from apispec_webframeworks.flask import FlaskPlugin
+# from apispec_webframeworks.flask import FlaskPlugin
 from apispec import APISpec
-from flask_apispec.extension import  FlaskApiSpec
+from flask_apispec.extension import FlaskApiSpec
 from .schemas import UserSchema, AuthSchema, TestClass, TestSchema
 from flask_apispec import use_kwargs, marshal_with
 import sqlalchemy as db
@@ -12,8 +12,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from flask_cors import CORS
 from .config import Config
+#from app.model import *
+from datetime import datetime
 import logging
-
+import threading
 
 
 app = Flask(__name__,
@@ -31,38 +33,30 @@ engine = create_engine('sqlite:///db.sqlite')
 session = scoped_session(sessionmaker(
     autocommit=False, autoflush=False, bind=engine))
 
+session_lock = threading.Lock()
+
 Base = declarative_base()
 Base.query = session.query_property()
 
 jwt = JWTManager(app)
 
-
 docs = FlaskApiSpec()
 
-
 spec = APISpec(
-        title='railwaytickets',
-        version='v1',
-        openapi_version='2.0.0',
-        plugins=[MarshmallowPlugin()],
-    )
-
-
+    title='railwaytickets',
+    version='v1',
+    openapi_version='2.0.0',
+    plugins=[MarshmallowPlugin()],
+)
 
 jwt_scheme = {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"}
 
-
-
-
 spec.components.security_scheme("jwt", jwt_scheme)
 
-
 app.config.update({
-    'APISPEC_SPEC': spec ,
+    'APISPEC_SPEC': spec,
     'APISPEC_SWAGGER_URL': '/swagger/'
 })
-
-
 
 
 def setup_logger():
@@ -81,14 +75,12 @@ def setup_logger():
 logger = setup_logger()
 
 
-
 @app.teardown_appcontext
-def shutdown_session(exception = None):
+def shutdown_session(exception=None):
     session.remove()
 
 
 from app.routes import test
-
 
 from .routes.users.views import users
 from .routes.main.views import main
@@ -100,4 +92,3 @@ app.register_blueprint(profile)
 
 docs.init_app(app)
 jwt.init_app(app)
-
