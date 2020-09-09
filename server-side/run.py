@@ -1,6 +1,25 @@
 from datetime import datetime
-from app import app, session
+from app import app, session, logger, session_lock
 from app.model import *
+import threading
+import atexit
+
+
+database_cleaning_thread = threading.Thread()
+
+
+def database_clean(name):
+    logger.info('thread %s begins the proccess')
+    session_lock.acquire()
+    now = datetime.now()
+    tickets_to_delete = session.query(Ticket).filter(Ticket.book_end_date > now).all()
+    if len(tickets_to_delete) != 0:
+        print(str(len(tickets_to_delete)) + " outdated bookings found, commence deletion")
+    for ticket in tickets_to_delete:
+        session.delete(ticket)
+    session.commit()
+    session_lock.release()
+    logger.info('thread %s proccess completed')
 
 #app = create_app()
 
