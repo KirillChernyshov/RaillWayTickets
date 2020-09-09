@@ -13,3 +13,10 @@ def test_ticket_booking(session, trains, routes, stops, schedules, wagons, user,
                              headers={'Authorization': 'Bearer ' + login.get_json()['access_token']})
     print(new_result.get_json())
     assert new_result == '200 OK'
+
+#login = client.post('/login', json={'email': 'testmail@mail.com', 'password': 'passw'})
+
+
+#ticket_data = {'schedule_id': 1, 'arrival_stop_id': 4,
+#                   'cost': 34, 'departure_stop_id': 1,
+#                   'wagon_id': 1, 'place': 1}

@@ -12,8 +12,8 @@ def database_clean(name):
     while exit_flag is False:
         logger.info('thread %s begins the proccess')
         session_lock.acquire()
-        now = datetime.now()
-        tickets_to_delete = session.query(Ticket).filter(Ticket.book_end_date > now).all()
+        now = datetime.datetime(2020, 9, 29, 0, 0)
+        tickets_to_delete = session.query(Ticket).filter(Ticket.book_end_date < now).all()
         if len(tickets_to_delete) != 0:
             print(str(len(tickets_to_delete)) + " outdated bookings found, commence deletion")
         for ticket in tickets_to_delete:
@@ -22,11 +22,12 @@ def database_clean(name):
         session_lock.release()
         logger.info('thread %s proccess completed')
 
+
 class StoppableThread(threading.Thread):
     """Thread class with a stop() method. The thread itself has to check
     regularly for the stopped() condition."""
 
-    def __init__(self,  *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super(StoppableThread, self).__init__(*args, **kwargs)
         self._stop_event = threading.Event()
 
@@ -37,7 +38,7 @@ class StoppableThread(threading.Thread):
         return self._stop_event.is_set()
 
     def run(self):
-        while stopped(self) is False:
+        while self.stopped() is False:
             logger.info('thread %s begins the proccess')
             session_lock.acquire()
             now = datetime.now()
@@ -49,6 +50,8 @@ class StoppableThread(threading.Thread):
             session.commit()
             session_lock.release()
             logger.info('thread %s proccess completed')
+            self._stop_event.wait(4)
+
 
 # app = create_app()
 
@@ -73,7 +76,7 @@ def mockup():
              Stop(station_id=stations[1].id, route_id=routes[0].id,
                   arriving=datetime(2020, 10, 1, 2, 0), departure=datetime(2020, 10, 1, 2, 5)),
              Stop(station_id=stations[2].id, route_id=routes[0].id,
-                  arriving=datetime(2020, 10, 1, 4, 0)),
+                  arriving=datetime(2020, 10, 1, 4, 0), departure=datetime(2020, 10, 1, 4, 5)),
              Stop(station_id=stations[3].id, route_id=routes[0].id,
                   arriving=datetime(2020, 10, 1, 7, 0))]
     session.add_all(stops)
@@ -89,18 +92,17 @@ def mockup():
     schedules = [Schedule(train_id=trains[0].id, base_route_id=routes[0].id, departure_time=stops[0].departure)]
     session.add_all(schedules)
     session.commit()
-    tickets = [Ticket(departure_stop=stops[2].id, arrival_stop=stops[3].id, cost=34, wagon_id=wagons[0].id, place=2,
-                      schedule_id=schedules[0].id, is_booked=False, user_id=users[0].id),
-               Ticket(departure_stop=stops[1].id, arrival_stop=stops[3].id, cost=34, wagon_id=wagons[1].id, place=3,
-                      schedule_id=schedules[0].id, is_booked=False, user_id=users[0].id)]
+    tickets = [
+        Ticket(departure_stop_id=stops[2].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[0].id, place=2,
+               schedule_id=schedules[0].id, is_booked=False, user_id=users[0].id),
+        Ticket(departure_stop_id=stops[1].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[1].id, place=3,
+               schedule_id=schedules[0].id, is_booked=False, user_id=users[0].id)]
     session.add_all(tickets)
     session.commit()
 
 
 if __name__ == '__main__':
-    global exit_flag
-    exit_flag = False
-    database_cleaning_thread = threading.Thread(target=database_clean, args=("tickets_cleaner",))
+    database_cleaning_thread = StoppableThread()
     database_cleaning_thread.start()
     app.run(debug=True)
-    exit_flag = True
+    database_cleaning_thread.stop()
