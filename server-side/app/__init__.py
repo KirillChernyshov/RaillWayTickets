@@ -12,7 +12,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from flask_cors import CORS
 from .config import Config
-from app.model import Ticket
+#from app.model import *
 from datetime import datetime
 import logging
 import threading
