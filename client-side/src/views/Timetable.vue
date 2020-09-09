@@ -71,7 +71,7 @@ export default {
         arr_station_name: null,
         dep_station_name: null,
         date: moment().add(1, 'day').format('YYYY-MM-DD'),
-        time: moment().format('hh:mm:ss'),
+        time: moment().format('HH:mm:ss'),
     }),
     computed: {
         ...mapState({

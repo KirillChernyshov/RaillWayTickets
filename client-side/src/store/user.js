@@ -59,8 +59,8 @@ export default {
         setTickets(state, tickets) {
             state.tickets = tickets.map(ticket => ({
                 ...ticket,
-                departure_time: moment(ticket.departure_time).format("DD.MM.YYYY hh:mm"),
-                arrival_time: moment(ticket.arrival_time).format("DD.MM.YYYY hh:mm"),
+                departure_time: moment(ticket.departure_time).format("DD.MM.YYYY HH:mm"),
+                arrival_time: moment(ticket.arrival_time).format("DD.MM.YYYY HH:mm"),
             }));
 
             // for (let i = 0; i < 100; i++) {
