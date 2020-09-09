@@ -95,10 +95,18 @@ class TicketInfoSchema(Schema):
     wagon_id = fields.Integer(required=True)
     place = fields.Integer(required=True)
     cost = fields.String(required=True)
+    is_booked = fields.Boolean(required=True)
+    booking_end_date = fields.DateTime(missing=None)
 
 class CitiesListSchema(Schema):
     city_name = fields.String(required=True)
 
+class StatusMessageSchema(Schema):
+    msg = fields.String(required=True)
+
+class TicketSearchSchema(Schema):
+    ticket_id = fields.Integer(missing=None)
+    usr_email = fields.String(missing=None)
 
 
 

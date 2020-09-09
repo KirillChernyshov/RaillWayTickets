@@ -33,6 +33,8 @@ engine = create_engine('sqlite:///db.sqlite')
 session = scoped_session(sessionmaker(
     autocommit=False, autoflush=False, bind=engine))
 
+blacklist = set()
+
 session_lock = threading.Lock()
 
 Base = declarative_base()
@@ -74,6 +76,10 @@ def setup_logger():
 
 logger = setup_logger()
 
+@jwt.token_in_blacklist_loader
+def check_if_token_in_blacklist(decrypted_token):
+    jti = decrypted_token['jti']
+    return jti in blacklist
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):

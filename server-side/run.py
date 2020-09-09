@@ -7,22 +7,6 @@ import atexit
 database_cleaning_thread = threading.Thread()
 
 
-def database_clean(name):
-    global exit_flag
-    while exit_flag is False:
-        logger.info('thread %s begins the proccess')
-        session_lock.acquire()
-        now = datetime.datetime(2020, 9, 29, 0, 0)
-        tickets_to_delete = session.query(Ticket).filter(Ticket.book_end_date < now).all()
-        if len(tickets_to_delete) != 0:
-            print(str(len(tickets_to_delete)) + " outdated bookings found, commence deletion")
-        for ticket in tickets_to_delete:
-            session.delete(ticket)
-        session.commit()
-        session_lock.release()
-        logger.info('thread %s proccess completed')
-
-
 class StoppableThread(threading.Thread):
     """Thread class with a stop() method. The thread itself has to check
     regularly for the stopped() condition."""
@@ -56,12 +40,10 @@ class StoppableThread(threading.Thread):
 # app = create_app()
 
 def mockup():
-    users = [User(
-        firstname='testn',
-        lastname='testsg',
-        email='testmail@mail.com',
-        password='passw',
-        role='client')]
+    users = [
+        User(firstname='testn', lastname='testsg', email='testmail@mail.com', password='passw', role='client'),
+        User(firstname='testmng', lastname='testmng', email='mngemail@mail.com', password='mngpassw', role='manager')
+    ]
     session.add_all(users)
     stations = [Station(name="лубянка-1", province="Рязанская область"),
                 Station(name="искра-1", province="Рязанская область"),

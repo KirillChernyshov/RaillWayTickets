@@ -46,6 +46,14 @@ def user(session):
 
     return user
 
+def manager(session):
+    manager = User(firstname='testmng', lastname='testmng',
+                   email='mngemail@mail.com', password='mngpassw', role='manager')
+    session.add(manager)
+    session.commit()
+
+    return manager
+
 
 @pytest.fixture
 def client(testapp):
@@ -57,6 +65,14 @@ def user_token(user, client):
     res = client.post('/login', json={
         'email': user.email,
         'password': 'passw'
+    })
+    return res.get_json()['access_token']
+
+@pytest.fixture
+def manager_token(manager,client):
+    res = client.post('/login', json={
+        'email': manager.email,
+        'password': 'mngpassw'
     })
     return res.get_json()['access_token']
 
