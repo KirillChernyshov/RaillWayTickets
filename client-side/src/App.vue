@@ -42,7 +42,7 @@ export default {
     box-sizing: border-box;
     margin: auto;
     max-width: 1024px;
-    padding-top: 8vh;
+    padding-top: 60px;
     padding-bottom: 3vh;
     width: 120vh;
     /* height: 300vh; */

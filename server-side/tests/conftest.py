@@ -130,13 +130,13 @@ def schedules(session, trains, routes, stops):
 
 @pytest.fixture
 def tickets(session, trains, routes, stops, schedules, wagons, user):
-    tickets = [
-        Ticket(user_id=user.id, departure_stop_id=stops[2].id, arrival_stop_id=stops[3].id, cost=34,
-               wagon_id=wagons[0].id, place=2,
-               schedule_id=schedules[0].id, is_booked=False),
-        Ticket(user_id=user.id, departure_stop_id=stops[1].id, arrival_stop_id=stops[3].id, cost=34,
-               wagon_id=wagons[1].id, place=3,
-               schedule_id=schedules[0].id, is_booked=False)]
+    tickets = [Ticket(departure_stop_id=stops[2].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[0].id, place_num=2,
+                      schedule_id=schedules[0].id, is_booked=False, user_id = user.id),
+               Ticket(departure_stop_id=stops[1].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[1].id, place_num=3,
+                      schedule_id=schedules[0].id, is_booked=False, user_id = user.id),
+               Ticket(departure_stop_id=stops[0].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[1].id, place_num=1,
+                      schedule_id=schedules[0].id, is_booked=False, user_id=user.id)]
+
     session.add_all(tickets)
     session.commit()
     return schedules

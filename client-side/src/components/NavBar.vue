@@ -21,7 +21,7 @@
                             <em>{{ name }}</em>
                         </template>
                         <b-dropdown-item href="/profile">Profile</b-dropdown-item>
-                        <b-dropdown-item @click="clearUserData" >Sign Out</b-dropdown-item>
+                        <b-dropdown-item @click="signOut" >Sign Out</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>
@@ -43,7 +43,11 @@ export default {
     methods: {
         ...mapMutations('user', [
             'clearUserData',
-        ])
+        ]),
+        signOut() {
+            this.$router.push('/');
+            this.clearUserData();
+        }
     }
 }
 </script>

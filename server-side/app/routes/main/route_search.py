@@ -12,8 +12,10 @@ def get_all_routes(departure_province, arrival_province, arrival_time):
     arr_station = aliased(Station, name='arr_station')
     routes_info = session.query(Schedule, dep_stop, arr_stop). \
         join(dep_stop, dep_stop.route_id == Schedule.base_route_id). \
-        join(dep_station, dep_station.id == dep_stop.station_id).filter(dep_station.province == departure_province). \
+        join(dep_station, dep_station.id == dep_stop.station_id). \
         join(arr_stop, arr_stop.route_id == Schedule.base_route_id). \
-        filter(arr_stop.id > dep_stop.id, arr_stop.arriving < arrival_time). \
-        join(arr_station, arr_station.id == arr_stop.station_id).filter(arr_station.province == arrival_province)
+        join(arr_station, arr_station.id == arr_stop.station_id). \
+        filter(dep_station.province == departure_province, arr_station.province == arrival_province,
+               arr_stop.id > dep_stop.id, arr_stop.arriving < arrival_time)
+    print(len(routes_info.all()))
     return routes_info

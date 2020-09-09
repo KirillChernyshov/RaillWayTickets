@@ -1,5 +1,6 @@
 import { userTickets } from '../api/index.js'
 import axios from 'axios'
+import moment from 'moment';
 
 export default {
     namespaced: true,
@@ -9,7 +10,8 @@ export default {
             lastname: null,
             access_token: null,
             role: null,
-        }
+        },
+        tickets: [],
     },
     getters: {
         valid(state) {
@@ -54,27 +56,41 @@ export default {
 
             this.commit('user/setUserData', localStorage);
         },
+        setTickets(state, tickets) {
+            state.tickets = tickets.map(ticket => ({
+                ...ticket,
+                departure_time: moment(ticket.departure_time).format("DD.MM.YYYY HH:mm"),
+                arrival_time: moment(ticket.arrival_time).format("DD.MM.YYYY HH:mm"),
+            }));
+
+            // for (let i = 0; i < 100; i++) {
+            //     state.tickets.push(tickets[0]);
+            // }
+        },
+        removeTicket(state, id) {
+            let index = state.tickets.findIndex(ticket => ticket.ticket_id == id)
+
+            if (index == -1)
+                return;
+
+            state.tickets.splice(index, 1);
+        }
     },
     actions: {
-        getUserTickets({ state }) {
+        getUserTickets({ commit }) {
             userTickets()
                 .then(res => {
-                    console.log("userTickets", state);
+                    console.log("userTickets");
                     console.log(res.data);
-                    //router.push("/");
-                    //commit("user/setUserData", res.data, { root: true });
+                    commit('setTickets', res.data);
                 })
                 .catch(er => {
-                    console.log(er.response, er.response.status == 422);
-                    // if (er.response.status == 400)
-                    //     state.error = "Данный почтовый адрес уже занят! :(";
-                    //     state.waiting = false;
-                    //
-                    //     setTimeout(() => {
-                    //         state.error = "";
-                    //     }, 10000);
+                    console.log(er.response);
+
                 })
         },
-
+        cancelTicketReservation({ commit }, id) {
+            commit('removeTicket', id);
+        }
     }
 }

@@ -40,7 +40,7 @@ def get_cities():
     return [{'city_name': city[0]} for city in cities]
 
 
-@main.route('/search', methods=['GET'])
+@main.route('/search', methods=['POST'])
 @use_kwargs(RouteSearchSchema)
 @marshal_with(RoutesSearchResponseSchema)
 def get_schedules(**kwargs):
@@ -53,7 +53,9 @@ def get_schedules(**kwargs):
         return {'are_found': False}
 
 
-@main.route('/get_route_info', methods=['GET'])
+
+
+@main.route('/get_route_info',methods=['POST'])
 @doc(tag=['pet'], description='get empty seats on a train for a fragment of the schedule')
 @use_kwargs(RouteInfoSchema(only=['schedule_id', 'dep_stop_id', 'arr_stop_id']))
 @marshal_with(TrainSeatsResponse)
@@ -90,6 +92,16 @@ def book_ticket(**kwargs):
     session.commit()
     return 200
 
+@main.errorhandler(422)
+def handle_error(err):
+    headers = err.data.get('headers', None)
+    messages = err.data.get('messages', ['Invalid Request.'])
+    logger.warning(f'Invalid input params: {messages}')
+    if headers:
+        return jsonify({'message': messages}), 400, headers
+    else:
+        return jsonify({'message': messages}), 400
+
 
 docs.register(get_schedules, blueprint="main")
 docs.register(book_ticket, blueprint='main')
@@ -104,14 +116,14 @@ def get_fit_routes(routes_info):
         train_struc, wagon_types = get_seats_info(routes_info[i][0], routes_info[i][2], routes_info[i][1])
         seats_info = get_empty_train_seats_info(train_struc, wagon_types)
         if seats_info != {}:
-            routes.append(serialize_fit_route(routes_info[0], seats_info))
+            routes.append(serialize_fit_route(routes_info[i], seats_info))
     return routes
 
 
 def serialize_fit_route(route_info, seats_info):
-    arr_station_name = session.query(Station.name).filter(Station.id == route_info[2].station_id).one_or_none()
-    dep_station_name = session.query(Station.name).filter(Station.id == route_info[1].station_id).one_or_none()
-    route_name = session.query(BaseRoute.name).one_or_none()
+    arr_station_name = session.query(Station).get(route_info[2].station_id).name
+    dep_station_name = session.query(Station).get(route_info[1].station_id).name
+    route_name = session.query(BaseRoute).get(route_info.Schedule.base_route_id).Name
     route_info_dict = {'departure_time': route_info[1].departure,
                        'arrival_time': route_info[2].arriving,
                        'schedule_id': route_info[0].id, 'dep_stop_id': route_info[1].station_id,

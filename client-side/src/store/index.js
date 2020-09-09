@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import auth from './authorization.js'
 import reg from './registration.js'
 import user from './user.js'
+import timetable from './timetable.js'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,7 @@ export default new Vuex.Store({
         hi: "hi",
     },
     getters: {
-        
+
     },
   mutations: {
   },
@@ -22,5 +23,6 @@ export default new Vuex.Store({
       auth,
       reg,
       user,
+      timetable,
   }
 });

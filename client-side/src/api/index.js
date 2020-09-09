@@ -13,3 +13,11 @@ export function authorization (data) {
 export function userTickets() {
     return axios.get(`${url}/user_tickets`);
 }
+
+export function getCities() {
+    return axios.get(`${url}/cities`);
+}
+
+export function searchRoutes(data) {
+    return axios.post(`${url}/search`, data);
+}
