@@ -72,8 +72,18 @@ class WagonInfoSchema(Schema):
 
 
 class TrainPlacesInfoSchema(Schema):
-    train_id = fields.Integer(requied=True)
+    train_id = fields.Integer(required=True)
     wagons_info = fields.List(fields.Nested(WagonInfoSchema), required=True)
+
+
+class TicketBookingSchema(Schema):
+    schedule_id = fields.Integer(required=True)
+    arrival_stop_id = fields.Integer(required=True)
+    departure_stop_id = fields.Integer(required=True)
+    wagon_id = fields.Integer(required=True)
+    place = fields.Integer(required=True)
+    cost = fields.Integer(required=True)
+
 
 class TicketInfoSchema(Schema):
     ticket_id = fields.Integer(required=True)
@@ -85,10 +95,18 @@ class TicketInfoSchema(Schema):
     wagon_id = fields.Integer(required=True)
     place = fields.Integer(required=True)
     cost = fields.String(required=True)
+    is_booked = fields.Boolean(required=True)
+    booking_end_date = fields.DateTime(missing=None)
 
 class CitiesListSchema(Schema):
     city_name = fields.String(required=True)
 
+class StatusMessageSchema(Schema):
+    msg = fields.String(required=True)
+
+class TicketSearchSchema(Schema):
+    ticket_id = fields.Integer(missing=None)
+    usr_email = fields.String(missing=None)
 
 
 

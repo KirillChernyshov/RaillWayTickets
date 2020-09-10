@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify
-from app import logger, session, docs
-from app.schemas import UserSchema, AuthSchema
+from app import logger, session, docs, blacklist
+from app.schemas import UserSchema, AuthSchema, StatusMessageSchema
 from flask_apispec import use_kwargs, marshal_with
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_raw_jwt
 from app.model import User
 
 
@@ -38,7 +38,18 @@ def login(**kwargs):
         return {'message': str(e)}, 400
     return {'access_token': token , 'firstname': user.firstname, 'lastname': user.lastname, 'role': user.role}
 
-
+@users.route('/logout', methods=['DELETE'])
+@jwt_required
+@marshal_with(StatusMessageSchema)
+def logout():
+    try:
+        jti = get_raw_jwt()['jti']
+        blacklist.add(jti)
+    except Exception as e:
+        logger.warning(
+            f'logout failed with errors: {e}')
+        return {'message': str(e)}, 400
+    return {"msg": "Successfully logged out"}, 200
 
 @users.errorhandler(422)
 def handle_error(err):
@@ -50,7 +61,7 @@ def handle_error(err):
     else:
         return jsonify({'message': messages}), 400
 
-
+docs.register(logout, blueprint='users')
 docs.register(register, blueprint='users')
 docs.register(login, blueprint='users')
 

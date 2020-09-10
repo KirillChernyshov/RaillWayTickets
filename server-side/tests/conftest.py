@@ -46,6 +46,14 @@ def user(session):
 
     return user
 
+def manager(session):
+    manager = User(firstname='testmng', lastname='testmng',
+                   email='mngemail@mail.com', password='mngpassw', role='manager')
+    session.add(manager)
+    session.commit()
+
+    return manager
+
 
 @pytest.fixture
 def client(testapp):
@@ -57,6 +65,14 @@ def user_token(user, client):
     res = client.post('/login', json={
         'email': user.email,
         'password': 'passw'
+    })
+    return res.get_json()['access_token']
+
+@pytest.fixture
+def manager_token(manager,client):
+    res = client.post('/login', json={
+        'email': manager.email,
+        'password': 'mngpassw'
     })
     return res.get_json()['access_token']
 
@@ -82,7 +98,7 @@ def stations(session):
 
 @pytest.fixture
 def routes(session, stations):
-    routes = [BaseRoute(Name="Рязань - Мордовия")]
+    routes = [BaseRoute(name="Рязань - Мордовия")]
     session.add_all(routes)
     session.commit()
     return routes
@@ -130,10 +146,13 @@ def schedules(session, trains, routes, stops):
 
 @pytest.fixture
 def tickets(session, trains, routes, stops, schedules, wagons, user):
-    tickets = [Ticket(departure_stop=stops[2].id, arrival_stop=stops[3].id, cost=34, wagon_id=wagons[0].id, place_num=2,
+    tickets = [Ticket(departure_stop_id=stops[2].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[0].id, place_num=2,
                       schedule_id=schedules[0].id, is_booked=False, user_id = user.id),
-               Ticket(departure_stop=stops[1].id, arrival_stop=stops[3].id, cost=34, wagon_id=wagons[1].id, place_num=3,
-                      schedule_id=schedules[0].id, is_booked=False, user_id = user.id)]
+               Ticket(departure_stop_id=stops[1].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[1].id, place_num=3,
+                      schedule_id=schedules[0].id, is_booked=False, user_id = user.id),
+               Ticket(departure_stop_id=stops[0].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[1].id, place_num=1,
+                      schedule_id=schedules[0].id, is_booked=False, user_id=user.id)]
+
     session.add_all(tickets)
     session.commit()
     return schedules

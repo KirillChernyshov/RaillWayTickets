@@ -14,6 +14,7 @@ def test_user_login(user, client):
     assert res.status_code == 200
     assert res.get_json().get('access_token')
 
+
 def test_user_reg(client):
     res = client.post('/register', json={
         'firstname': 'testname',

@@ -1,12 +1,12 @@
 env
 app/static
-db.sqlite
+
 
 
 
 /.idea
 /__pycache__
-/**/__pycache__/*
+/**/__pycache__
 /**/.pytest_cache/*
 /alembic/*
 alembic.ini

@@ -1,5 +1,5 @@
 from app import db, session, Base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean, UniqueConstraint
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean, UniqueConstraint, Float
 from sqlalchemy.orm import relationship
 from flask_jwt_extended import create_access_token
 from datetime import timedelta
@@ -47,7 +47,7 @@ class Schedule(Base):
 class BaseRoute(Base):
     __tablename__ = "routes"
     id = Column(Integer, primary_key=True)
-    Name = Column(String(50), nullable=True)
+    name = Column(String(50), nullable=True)
     schedules = relationship('Schedule', backref='base_route', lazy=True)
 
 
@@ -71,7 +71,7 @@ class Station(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
     province = Column(String(50), nullable=False)
-    uniq_name = UniqueConstraint('name','province')
+    uniq_name = UniqueConstraint('name', 'province')
 
     def fullname(self):
         return self.province + " " + self.name
@@ -93,20 +93,23 @@ class Ticket(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     departure_stop = Column(Integer, ForeignKey('stops.id'))
     arrival_stop = Column(Integer, ForeignKey('stops.id'))
-    cost = Column(Integer, nullable=False)
+    cost = Column(Float, nullable=False)
     wagon_id = Column(Integer, ForeignKey('wagons.id'), nullable=False)
     place_num = Column(Integer, nullable=False)
     schedule_id = Column(Integer, ForeignKey('schedules.id'))
     is_booked = Column(Boolean, nullable=False)
     book_end_date = Column(DateTime, nullable=True)
 
-    def __init__(self, user_id, **kwargs):
+    def __init__(self, user_id, book_end_date=None, **kwargs):
         self.user_id = user_id
-        self.departure_stop = kwargs.get('departure_stop')
-        self.arrival_stop = kwargs.get('arrival_stop')
+        self.departure_stop = kwargs.get('departure_stop_id')
+        self.arrival_stop = kwargs.get('arrival_stop_id')
         self.cost = kwargs.get('cost')
         self.wagon_id = kwargs.get('wagon_id')
-        self.place_num = kwargs.get('place_num')
+        self.place_num = kwargs.get('place')
         self.schedule_id = kwargs.get('schedule_id')
-        self.is_booked = False
-        self.book_end_date = None
+        self.book_end_date = book_end_date
+        if self.book_end_date is None:
+            self.is_booked = False
+        else:
+            self.is_booked = True

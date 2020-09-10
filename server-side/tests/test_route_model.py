@@ -14,7 +14,7 @@ def test_stations(stations, session):
 def test_route(routes, stops, session):
     db_route = session.query(BaseRoute).get(1)
     db_stops = session.query(Stop).all()
-    assert db_route.Name == routes[0].Name
+    assert db_route.name == routes[0].name
     assert db_stops[0].route_id == stops[0].route_id
     assert db_stops[0].departure == stops[0].departure
 
@@ -28,20 +28,24 @@ def test_schedule(schedules, session, trains, routes, stops):
 
 
 def test_route_search(client, session, schedules , tickets, trains, routes, stops, wagons, stations):
-    routes_info = get_all_routes("Рязанская область", "Мордовия", datetime(2020, 10, 1, 8, 0))
-
-    #print(routes_info)
+    data = ["Рязанская область", "Рязанская область", datetime(2020, 10, 1, 8, 0)]
+    routes_info = get_all_routes(*data)
+    for route in routes_info:
+        print(str(route.dep_stop.station_id) + " " + str(route.arr_stop.station_id))
     assert len(routes_info.all()) == 3
     assert routes_info[0][0].id == 1
     routes = get_fit_routes(routes_info.all())
     assert len(routes) == 3
-    print(routes)
-    result = client.post('/search', json={'departure_province_name': "Рязанская область",
-                                         'arrival_province_name': "Мордовия",
+    #print(routes)
+    result = client.post('/search', json={'departure_province_name': "Мордовия",
+                                         'arrival_province_name': "Рязанская область",
                                          'arrival_date': datetime.isoformat(datetime(2020, 10, 1, 8, 0))})
     assert result.status == '200 OK'
     assert result.get_json().get('are_found')
-    assert len(result.get_json().get('routes')) == 3
+    r =result.get_json().get('routes')
+    for route in r:
+        print(route)
+    assert len(result.get_json().get('routes')) == 2
 
 
 
