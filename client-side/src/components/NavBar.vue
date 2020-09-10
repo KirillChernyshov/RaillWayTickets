@@ -8,6 +8,7 @@
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
                     <b-nav-item href="/timetable">Расписание</b-nav-item>
+                    <b-nav-item v-if="role == 'manager'" href="/confirmation">Потверждение билетов</b-nav-item>
                     <!-- <b-nav-item href="#" disabled>Disabled</b-nav-item> -->
                 </b-navbar-nav>
 
@@ -30,11 +31,14 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
     name: "nav-bar",
     computed: {
+        ...mapState({
+            role: state => state.user.local.role,
+        }),
         ...mapGetters('user', [
             'valid',
             'name',

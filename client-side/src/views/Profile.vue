@@ -14,7 +14,7 @@
                 </b-button>
             </template>
         </b-table>
-        <div v-else>Здесь будет отображаться список Ваших билетов</div>
+        <div v-if="role != 'manager' && !tickets.length">Здесь будет отображаться список Ваших билетов</div>
     </div>
 </template>
 
@@ -75,7 +75,8 @@ export default {
         },
         dRole() {
             let roles = {
-                client: "пользователь"
+                client: "пользователь",
+                manager: "менеджер"
             }
 
             return roles[this.role];

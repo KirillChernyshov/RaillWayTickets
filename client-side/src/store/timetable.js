@@ -37,6 +37,7 @@ export default {
         },
         searchRoutes({ commit, state }, data) {
             state.load = true;
+            console.log(data);
             searchRoutes(data)
                 .then(res => {
                     console.log("timetable/searchRoutes");

@@ -49,6 +49,18 @@ const routes = [
                 next()
             }
         },
+    },
+    {
+        path: '/confirmation',
+        name: 'confirmation',
+        component: () => import('../views/ConfirmationTickets.vue'),
+        beforeEnter (to, from, next) {
+            if (!localStorage.isAuth) {
+                next('/');
+            } else {
+                next()
+            }
+        },
     }
 ]
 

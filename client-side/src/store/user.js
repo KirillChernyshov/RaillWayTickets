@@ -35,7 +35,7 @@ export default {
                 state.local[key] = localStorage[key] = data[key];
             }
 
-            axios.defaults.headers.post['Bearer'] = localStorage.access_token;
+            axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.access_token}`;
             axios.defaults.headers.get['Authorization'] = `Bearer ${localStorage.access_token}`;
         },
         clearUserData(state) {
