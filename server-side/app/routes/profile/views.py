@@ -81,13 +81,11 @@ class UsersTickets(BaseView):
 def search_tickets(**kwargs):
     manager_id = get_jwt_identity()
     tickets = get_tickets(**kwargs)
-    if tickets is None:
-        return make_response(400)
     logger.info(f'manager {manager_id}  accessed tickets list')
     return UsersTickets.prepare_to_serialize(tickets)
 
 
-@profile.route('/delete_ticket', methods=['DELETE'])
+@profile.route('/delete_ticket', methods=['POST'])
 @doc(tag=['pet'], description='desc')
 @jwt_required
 @manager_level_access
@@ -140,5 +138,5 @@ def get_tickets(**kwargs):
         return session.query(Ticket).join(User, User.id == Ticket.user_id). \
             filter(User.email == kwargs.get('usr_email')).all()
     if (kwargs.get('ticket_id') is not None):
-        return session.query(Ticket).get(kwargs.get('ticket_id')).all()
-    return None
+        return [session.query(Ticket).get(kwargs.get('ticket_id'))]
+    return []

@@ -10,7 +10,7 @@ def manager_level_access(f):
         user_id = get_jwt_identity()
         user = session.query(User).get(user_id)
         if user.role != 'manager':
-            return make_response(401)
+            return make_response({"msg": "no access to ticket deletion"},401)
         return f(*args, **kwargs)
     return decorated_f
 

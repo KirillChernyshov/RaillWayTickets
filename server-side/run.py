@@ -37,7 +37,6 @@ class StoppableThread(threading.Thread):
             self._stop_event.wait(4)
         logger.info('dataclean thread has stopped')
 
-
 # app = create_app()
 
 def mockup():
@@ -83,9 +82,10 @@ def mockup():
     session.add_all(tickets)
     session.commit()
 
-#
+
 if __name__ == '__main__':
     database_cleaning_thread = StoppableThread()
+    database_cleaning_thread.setDaemon(True)
     database_cleaning_thread.start()
     app.run(debug=True)
     database_cleaning_thread.stop()

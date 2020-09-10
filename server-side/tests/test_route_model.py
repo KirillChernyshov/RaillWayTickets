@@ -37,15 +37,15 @@ def test_route_search(client, session, schedules , tickets, trains, routes, stop
     routes = get_fit_routes(routes_info.all())
     assert len(routes) == 3
     #print(routes)
-    result = client.post('/search', json={'departure_province_name': "Мордовия",
-                                         'arrival_province_name': "Рязанская область",
+    result = client.post('/search', json={'departure_province_name': "Рязанская область",
+                                         'arrival_province_name': "Мордовия",
                                          'arrival_date': datetime.isoformat(datetime(2020, 10, 1, 8, 0))})
     assert result.status == '200 OK'
     assert result.get_json().get('are_found')
     r =result.get_json().get('routes')
     for route in r:
         print(route)
-    assert len(result.get_json().get('routes')) == 2
+    assert len(result.get_json().get('routes')) == 3
 
 
 

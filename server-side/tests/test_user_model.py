@@ -35,4 +35,4 @@ def test_user_tickets(client, user, tickets):
     user_tickets_query = client.get('/user_tickets', headers={'Authorization': str})
     assert user_tickets_query.status_code == 200
     print(user_tickets_query.get_json())
-    assert len(user_tickets_query.get_json())==2
+    assert len(user_tickets_query.get_json())==3

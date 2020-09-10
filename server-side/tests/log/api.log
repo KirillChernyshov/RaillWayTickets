@@ -317,3 +317,153 @@ sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) NOT NULL constraint fail
 [SQL: INSERT INTO tickets (user_id, departure_stop, arrival_stop, cost, wagon_id, place_num, schedule_id, is_booked, book_end_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)]
 [parameters: (1, 1, 4, 34, 1, None, 1, 1, '2020-09-27 00:00:00.000000')]
 (Background on this error at: http://sqlalche.me/e/13/gkpj)
+2020-09-09 23:55:26,428:app:ERROR:Exception on /delete_ticket [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 13, in decorated_f
+    return make_response(401)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\helpers.py", line 223, in make_response
+    return current_app.make_response(args)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2127, in make_response
+    raise TypeError(
+TypeError: The view function did not return a valid response. The return type must be a string, dict, tuple, Response instance, or WSGI callable, but it was a int.
+2020-09-10 00:01:52,638:app:INFO:manager 2 deleted ticket
+2020-09-10 00:02:48,046:app:INFO:manager 2 deleted ticket
+2020-09-10 00:23:17,810:app:INFO:manager 2 deleted ticket
+2020-09-10 00:23:22,909:app:ERROR:Exception on /search_tickets [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\profile\views.py", line 85, in search_tickets
+    return make_response(400)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\helpers.py", line 223, in make_response
+    return current_app.make_response(args)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2127, in make_response
+    raise TypeError(
+TypeError: The view function did not return a valid response. The return type must be a string, dict, tuple, Response instance, or WSGI callable, but it was a int.
+2020-09-10 00:26:03,520:app:INFO:manager 2 deleted ticket
+2020-09-10 00:26:08,790:app:INFO:manager 2  accessed tickets list
+2020-09-10 00:26:08,830:app:ERROR:Exception on /search_tickets [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\profile\views.py", line 83, in search_tickets
+    tickets = get_tickets(**kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\profile\views.py", line 141, in get_tickets
+    return session.query(Ticket).get(kwargs.get('ticket_id')).all()
+AttributeError: 'Ticket' object has no attribute 'all'
+2020-09-10 00:26:58,490:app:INFO:manager 2 deleted ticket
+2020-09-10 00:27:03,405:app:INFO:manager 2  accessed tickets list
+2020-09-10 00:27:03,440:app:INFO:manager 2  accessed tickets list
+2020-09-10 00:27:03,440:app:ERROR:Exception on /search_tickets [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\profile\views.py", line 85, in search_tickets
+    return UsersTickets.prepare_to_serialize(tickets)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\profile\views.py", line 52, in prepare_to_serialize
+    for ticket in tickets:
+TypeError: 'Ticket' object is not iterable
+2020-09-10 00:27:28,930:app:INFO:manager 2 deleted ticket
+2020-09-10 00:27:34,525:app:INFO:manager 2  accessed tickets list
+2020-09-10 00:27:34,565:app:INFO:manager 2  accessed tickets list
+2020-09-10 00:29:55,970:app:INFO:manager 2 deleted ticket
+2020-09-10 00:30:03,570:app:INFO:manager 2  accessed tickets list
+2020-09-10 00:30:03,665:app:INFO:manager 2  accessed tickets list
+2020-09-10 00:31:10,192:app:INFO:manager 2 deleted ticket
+2020-09-10 00:31:15,798:app:INFO:manager 2  accessed tickets list
+2020-09-10 00:31:15,833:app:INFO:manager 2  accessed tickets list
+2020-09-10 22:50:52,417:app:INFO:manager 2 deleted ticket
+2020-09-10 22:50:57,986:app:INFO:manager 2  accessed tickets list
+2020-09-10 22:50:58,026:app:INFO:manager 2  accessed tickets list
+2020-09-10 22:52:47,212:app:INFO:manager 2 deleted ticket
+2020-09-10 22:52:54,346:app:INFO:manager 2  accessed tickets list
+2020-09-10 22:52:54,376:app:INFO:manager 2  accessed tickets list
+2020-09-10 22:54:18,926:app:INFO:manager 2 deleted ticket
+2020-09-10 22:54:23,576:app:INFO:manager 2  accessed tickets list
+2020-09-10 22:54:23,601:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:12:15,658:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:12:21,728:app:INFO:manager 2 deleted ticket
+2020-09-10 23:12:27,363:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:12:27,398:app:INFO:manager 2  accessed tickets list

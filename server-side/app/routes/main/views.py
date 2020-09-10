@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, jsonify, Flask, send_from_directory
+from flask import render_template, Blueprint, jsonify, Flask, send_from_directory, make_response
 from app import logger, docs, session
 from flask_apispec.annotations import doc
 from sqlalchemy.orm import aliased
@@ -8,7 +8,6 @@ from app.model import *
 from datetime import datetime
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from .route_search import *
-
 
 main = Blueprint('main', __name__)
 
@@ -53,9 +52,7 @@ def get_schedules(**kwargs):
         return {'are_found': False}
 
 
-
-
-@main.route('/get_route_info',methods=['POST'])
+@main.route('/get_route_info', methods=['POST'])
 @doc(tag=['pet'], description='get empty seats on a train for a fragment of the schedule')
 @use_kwargs(RouteInfoSchema(only=['schedule_id', 'dep_stop_id', 'arr_stop_id']))
 @marshal_with(TrainSeatsResponse)
@@ -73,16 +70,17 @@ def get_empty_places(**kwargs):
 @doc(tag=['pet'], description='for booking a ticket')
 @jwt_required
 @use_kwargs(TicketBookingSchema)
+@marshal_with(StatusMessageSchema)
 def book_ticket(**kwargs):
     user_id = get_jwt_identity()
     now_time = datetime.now()
     train_dep_time = session.query(Schedule).get(kwargs.get('schedule_id')).departure_time
     late_booking_limit = train_dep_time - timedelta(days=4)
-    #late_booking_limit = train_dep_time - timedelta(days=4)
-    if(late_booking_limit<now_time):
+    # late_booking_limit = train_dep_time - timedelta(days=4)
+    if (late_booking_limit < now_time):
         print(train_dep_time)
         print(now_time)
-        return 409
+        return make_response({'msg': 'can no longer book tickets for this train.'}, 409)
     early_booking_limit = now_time + timedelta(days=30)
     book_end_date = min(early_booking_limit, late_booking_limit)
     print(book_end_date)
@@ -90,7 +88,8 @@ def book_ticket(**kwargs):
     ticket = Ticket(user_id=user_id, book_end_date=book_end_date, **kwargs)
     session.add(ticket)
     session.commit()
-    return 200
+    return make_response({'msg': 'ticket succesfully booked'}, 200)
+
 
 @main.errorhandler(422)
 def handle_error(err):
@@ -122,7 +121,7 @@ def get_fit_routes(routes_info):
 def serialize_fit_route(route_info, seats_info):
     arr_station_name = session.query(Station).get(route_info[2].station_id).name
     dep_station_name = session.query(Station).get(route_info[1].station_id).name
-    route_name = session.query(BaseRoute).get(route_info.Schedule.base_route_id).Name
+    route_name = session.query(BaseRoute).get(route_info.Schedule.base_route_id).name
     route_info_dict = {'departure_time': route_info[1].departure,
                        'arrival_time': route_info[2].arriving,
                        'schedule_id': route_info[0].id, 'dep_stop_id': route_info[1].station_id,
