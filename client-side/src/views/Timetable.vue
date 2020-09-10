@@ -44,7 +44,7 @@
                 <b-button
                     size="sm"
                     variant="info"
-                    @click="cancelReservation(row.item.ticket_id)"
+                    @click="showBookTicket(row.item)"
                     class="mr-2"
                 >
                   Бронировать билет
@@ -58,12 +58,14 @@
             </template>
         </b-table>
 
+        <BookTicket v-bind="bookTicket" />
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import moment from 'moment'
+import BookTicket from '../components/BookTicket.vue'
 
 export default {
     name: "timetable",
@@ -72,6 +74,8 @@ export default {
         dep_station_name: null,
         date: moment().add(1, 'day').format('YYYY-MM-DD'),
         time: moment().format('HH:mm:ss'),
+        bookTicket: {
+        },
     }),
     computed: {
         ...mapState({
@@ -123,7 +127,13 @@ export default {
                 arrival_province_name: this.arr_station_name,
                 departure_province_name: this.dep_station_name,
             });
-        }
+        },
+        ...mapMutations('bookTicket', [
+            'showBookTicket',
+        ])
+        // showBookTicket(data) {
+        //     this.$store.commit('bookTicket/showBookTicket', data);
+        // }
     },
     watch: {
         cities(val) {
@@ -132,6 +142,9 @@ export default {
             this.arr_station_name = val[0];
             this.dep_station_name = val[1];
         },
+    },
+    components: {
+        BookTicket,
     },
     created() {
         this.$store.dispatch('timetable/getCitiesList');
