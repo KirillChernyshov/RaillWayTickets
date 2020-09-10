@@ -117,7 +117,7 @@ def verify_ticket(**kwargs):
         ticket_id = kwargs.get('ticket_id')
         kwargs.get('ticket_id')
         session.query(Ticket).filter(Ticket.id == ticket_id). \
-            update({'is_booked': False, 'booking_end_date': None}, synchronize_session='evaluate')
+            update({'is_booked': False, 'book_end_date': None}, synchronize_session='evaluate')
         logger.info(f'manager {manager_id} verified ticket {ticket_id}')
     except Exception as e:
         logger.warning(

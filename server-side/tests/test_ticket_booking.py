@@ -14,17 +14,20 @@ def test_ticket_booking(session, trains, routes, stops, schedules, wagons, user,
                              headers={'Authorization': 'Bearer ' + login.get_json()['access_token']})
     print(new_result.get_json())
     assert new_result.status == '200 OK'
-    usr_tickets = client.post('/search_tickets', json={'email': user.email},
+    usr_tickets = client.post('/search_tickets', json={'usr_email': user.email},
                               headers={'Authorization': 'Bearer ' + manager_token})
-    assert len(usr_tickets) == 4
-    verification_query = client.post('/verify_ticket', json={'ticket_id': usr_tickets[3]['ticket_id']})
+    assert usr_tickets.status == '200 OK'
+    assert len(usr_tickets.get_json()) == 4
+    verification_query = client.post('/verify_ticket', json={'ticket_id': usr_tickets.get_json()[3]['ticket_id']})
     assert verification_query.status == '401 UNAUTHORIZED'
-    verification_query = client.post('/verify_ticket', json={'ticket_id': usr_tickets[3]['ticket_id']},
+    verification_query = client.post('/verify_ticket', json={'ticket_id': usr_tickets.get_json()[3]['ticket_id']},
                                      headers={'Authorization': 'Bearer ' + manager_token})
     assert verification_query.status == '200 OK'
-    usr_tickets = client.post('/search_tickets', json={'email': user.email},
+    usr_tickets = client.post('/search_tickets', json={'usr_email': user.email},
                               headers={'Authorization': 'Bearer ' + manager_token})
-    assert usr_tickets[3]['is_booked'] == False
+    assert usr_tickets.status == '200 OK'
+    assert len(usr_tickets.get_json()) == 4
+    assert usr_tickets.get_json()[3]['is_booked'] == False
 
 
 # login = client.post('/login', json={'email': 'testmail@mail.com', 'password': 'passw'})
