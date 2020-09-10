@@ -21,3 +21,12 @@ export function getCities() {
 export function searchRoutes(data) {
     return axios.post(`${url}/search`, data);
 }
+
+export function getRouteInfo(data) {
+    return axios.get(`${url}/get_route_info`, data);
+}
+
+export function getTickets(data) {
+    console.log(data);
+    return axios.post(`${url}/search_tickets`, data);
+}

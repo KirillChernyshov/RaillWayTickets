@@ -70,8 +70,13 @@ export default {
     },
     watch: {
         show(val) {
-            if (val)
+            if (val) {
                 this.$bvModal.show('book_ticket');
+                console.log(this.bookData);
+                this.$store.dispatch('bookTicket/getRouteInfo', {
+
+                });
+            }
             else
                 this.$bvModal.hide('book_ticket');
         }

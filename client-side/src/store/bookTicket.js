@@ -1,3 +1,4 @@
+import { getRouteInfo } from '../api/index.js'
 
 export default {
     namespaced: true,
@@ -17,7 +18,6 @@ export default {
             state.data = data;
             state.show = true;
             console.log('bookTicket/showBookTicket');
-            console.log(state.data);
         },
         hideBookTicket(state) {
             state.data = {};
@@ -25,4 +25,17 @@ export default {
             console.log('bookTicket/hideBookTicket');
         }
     },
+    actions: {
+        getRouteInfo({ commit }, data) {
+            getRouteInfo(data)
+                .then(res => {
+                    console.log("bookTicket/getRouteInfo");
+                    console.log(res.data);
+                    commit();
+                })
+                .catch(err => {
+                    console.log(err.response);
+                });
+        }
+    }
 }

@@ -6,6 +6,7 @@ import reg from './registration.js'
 import user from './user.js'
 import timetable from './timetable.js'
 import bookTicket from './bookTicket.js'
+import confirmationTickets from './confirmationTickets.js'
 
 Vue.use(Vuex)
 
@@ -26,5 +27,6 @@ export default new Vuex.Store({
       user,
       timetable,
       bookTicket,
+      confirmationTickets,
   }
 });
