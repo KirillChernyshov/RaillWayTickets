@@ -504,3 +504,19 @@ TypeError: 'Ticket' object is not iterable
 2020-09-10 23:43:24,629:app:INFO:manager 2 deleted ticket
 2020-09-10 23:43:29,589:app:INFO:manager 2  accessed tickets list
 2020-09-10 23:43:29,629:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:24:36,086:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:24:36,124:app:INFO:manager 2 verified ticket 4
+2020-09-11 00:24:36,124:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:24:40,167:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:24:46,774:app:INFO:manager 2 deleted ticket
+2020-09-11 00:24:52,104:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:24:52,142:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:12,612:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:12,659:app:INFO:manager 2 verified ticket 4
+2020-09-11 00:26:12,675:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:16,840:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:18,333:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:18,370:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:23,694:app:INFO:manager 2 deleted ticket
+2020-09-11 00:26:29,896:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:29,927:app:INFO:manager 2  accessed tickets list
