@@ -84,6 +84,7 @@ class TicketBookingSchema(Schema):
     wagon_id = fields.Integer(required=True)
     place = fields.Integer(required=True)
     cost = fields.Integer(required=True)
+    buyer_email = fields.Email(missing=None)
 
 
 class TicketInfoSchema(Schema):

@@ -152,8 +152,8 @@ def tickets(session, trains, routes, stops, schedules, wagons, user):
                Ticket(departure_stop_id=stops[1].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[1].id, place=3,
                       schedule_id=schedules[0].id, is_booked=False, user_id = user.id),
                Ticket(departure_stop_id=stops[0].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[1].id, place=1,
-                      schedule_id=schedules[0].id, is_booked=False, user_id=user.id)]
+                      schedule_id=schedules[0].id, is_booked=True, user_id=user.id, book_end_date=datetime(2020,9,25,0,0))]
 
     session.add_all(tickets)
     session.commit()
-    return schedules
+    return tickets

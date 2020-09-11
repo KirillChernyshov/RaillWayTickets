@@ -8,7 +8,8 @@ from app.model import *
 from datetime import datetime
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.base_view import BaseView
-from app.decorators import manager_level_access
+from app.decorators import manager_level_access, check_access
+from operator import xor
 
 profile = Blueprint('profile', __name__)
 
@@ -88,20 +89,25 @@ def search_tickets(**kwargs):
 @profile.route('/delete_ticket', methods=['POST'])
 @doc(tag=['pet'], description='desc')
 @jwt_required
-@manager_level_access
 @use_kwargs(TicketInfoSchema(only=['ticket_id']))
 @marshal_with(StatusMessageSchema)
 def delete_ticket(**kwargs):
-    manager_id = get_jwt_identity()
+    user_id = get_jwt_identity()
     try:
+        role = check_access()
         ticket = session.query(Ticket).get(kwargs.get('ticket_id'))
-        session.delete(ticket)
-        session.commit()
+        if ((not ticket.is_booked) & ( role == "manager")) |\
+                (ticket.is_booked & ((ticket.user_id == user_id) | (role == "manager"))):
+            session.delete(ticket)
+            session.commit()
+        else:
+            return{'msg': "not allowed to delete the ticket" }, 401
     except Exception as e:
+        session.rollback()
         logger.warning(
-            f'manager: {manager_id} - failed to delete ticket: {e}')
+            f'user: {user_id} - failed to delete ticket: {e}')
         return {'message': str(e)}, 400
-    logger.info(f'manager {manager_id} deleted ticket')
+    logger.info(f'user {user_id} deleted ticket')
     return {"msg": "Successfully deleted ticket"}, 200
 
 
