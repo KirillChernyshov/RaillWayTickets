@@ -11,5 +11,5 @@ app/static
 /alembic/*
 alembic.ini
 log/api.log
-
+db.sqlite
 *.mwb
