@@ -1,5 +1,6 @@
 from app.model import *
 from copy import copy
+from operator import xor
 from sqlalchemy.sql.expression import text
 
 
@@ -20,6 +21,7 @@ def test_ticket_booking(session, trains, routes, stops, schedules, wagons, user,
                               headers={'Authorization': 'Bearer ' + manager_token})
     assert usr_tickets.status == '200 OK'
     assert len(usr_tickets.get_json()) == 4
+    assert usr_tickets.get_json()[3]['is_booked'] is True
     verification_query = client.post('/verify_ticket', json={'ticket_id': usr_tickets.get_json()[3]['ticket_id']})
     assert verification_query.status == '401 UNAUTHORIZED'
     verification_query = client.post('/verify_ticket', json={'ticket_id': usr_tickets.get_json()[3]['ticket_id']},
@@ -29,7 +31,11 @@ def test_ticket_booking(session, trains, routes, stops, schedules, wagons, user,
                               headers={'Authorization': 'Bearer ' + manager_token})
     assert usr_tickets.status == '200 OK'
     assert len(usr_tickets.get_json()) == 4
-    assert usr_tickets.get_json()[3]['is_booked'] == False
+    for i in range(4):
+        print(i)
+        print("ticket id - " + str(usr_tickets.get_json()[i]))
+        assert (xor(usr_tickets.get_json()[i]['is_booked'], (i==2))) is False
+    assert False == True
 
 
 def test_ticket_placement(session, tickets, client, manager_token, stops, schedules, wagons, user):

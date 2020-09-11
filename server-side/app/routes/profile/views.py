@@ -48,7 +48,7 @@ class UsersTickets(BaseView):
         return UsersTickets.prepare_to_serialize(tickets)
 
     @classmethod
-    def prepare_to_serialize(self, tickets):
+    def prepare_to_serialize(cls, tickets):
         ticket_data = []
         for ticket in tickets:
             schedule = Schedule.query.get(ticket.schedule_id)
