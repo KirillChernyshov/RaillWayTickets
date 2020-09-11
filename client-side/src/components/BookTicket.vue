@@ -42,10 +42,10 @@ export default {
         }),
         dataList() {
             return {
-                name: {
-                    header: 'Имя',
-                    value: `${this.firstname} ${this.lastname}`,
-                },
+                // name: {
+                //     header: 'Имя',
+                //     value: `${this.firstname} ${this.lastname}`,
+                // },
                 route: {
                     header: 'Маршрут',
                     value: this.bookData.route_name,

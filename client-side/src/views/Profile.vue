@@ -11,7 +11,7 @@
         <b-table v-if="tickets.length" sticky-header class="align-left" striped hover :items="tickets" :fields="fields">
             <template v-slot:cell(actions)="row">
                 <b-button size="sm" @click="cancelReservation(row.item.ticket_id)" class="mr-2">
-                 x
+                &#10008;
                 </b-button>
             </template>
         </b-table>
@@ -90,7 +90,8 @@ export default {
     },
     methods: {
         cancelReservation(id) {
-            this.$store.dispatch('user/cancelTicketReservation', id);
+            this.$store.dispatch('confirmationTickets/cancelReservation', id);
+            this.$store.dispatch('user/getUserTickets');
         }
     },
     created() {
@@ -119,5 +120,7 @@ export default {
     .align-left {
         text-align: left;
         max-height: 60vh;
+        margin-left: 5px!important;
+        margin-right: 5px!important;
     }
 </style>
