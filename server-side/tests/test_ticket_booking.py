@@ -1,4 +1,6 @@
 from app.model import *
+from copy import copy
+from sqlalchemy.sql.expression import text
 
 
 def test_ticket_booking(session, trains, routes, stops, schedules, wagons, user, tickets, client, manager_token):
@@ -43,18 +45,26 @@ def test_ticket_placement(session, tickets, client, manager_token, stops, schedu
     result = client.post('/place_ticket', json=ticket_data,
                          headers={'Authorization': 'Bearer ' + login.get_json()['access_token']})
     assert result.status == '401 UNAUTHORIZED'
+    ticket_data = {'schedule_id': schedules[0].id, 'arrival_stop_id': stops[3].id,
+                   'cost': 34, 'departure_stop_id': stops[0].id,
+                   'wagon_id': wagons[0].id, 'place': 1, 'buyer_email': "randomerg.ru"}
     result = client.post('/place_ticket', json=ticket_data,
+                         headers={'Authorization': 'Bearer ' + manager_token})
+    assert result.status == '400 BAD REQUEST'
+    ed_ticket_data = {'schedule_id': schedules[0].id, 'arrival_stop_id': stops[3].id,
+                      'cost': 34, 'departure_stop_id': stops[0].id,
+                      'wagon_id': wagons[0].id, 'place': 1, 'buyer_email': user.email}
+    result = client.post('/place_ticket', json=ed_ticket_data,
                          headers={'Authorization': 'Bearer ' + manager_token})
     assert result.status == '200 OK'
     usr_tickets = client.post('/search_tickets', json={'usr_email': user.email},
                               headers={'Authorization': 'Bearer ' + manager_token})
     assert usr_tickets.status == '200 OK'
-    assert len(usr_tickets.get_json()) == 3
+    assert len(usr_tickets.get_json()) == 4
     usr_tickets = client.post('/search_tickets', json={'ticket_id': 4},
                               headers={'Authorization': 'Bearer ' + manager_token})
     assert usr_tickets.status == '200 OK'
     assert len(usr_tickets.get_json()) == 1
-
 
 
 # login = client.post('/login', json={'email': 'testmail@mail.com', 'password': 'passw'})
@@ -69,12 +79,15 @@ def test_ticket_deletion(session, tickets, client, manager_token, user_token):
     mngstr = 'Bearer ' + manager_token
     user_tickets = client.get('/user_tickets', headers={'Authorization': usrstr})
     assert len(user_tickets.get_json()) == 3
+    assert len(tickets) == 3
     delete_query = client.post('/delete_ticket', json={'ticket_id': tickets[0].id}, headers={'Authorization': usrstr})
     assert delete_query.status == '401 UNAUTHORIZED'
+    delete_query = client.post('/delete_ticket', json={'ticket_id': tickets[2].id}, headers={'Authorization': usrstr})
+    assert delete_query.status == '200 OK'
     delete_query = client.post('/delete_ticket', json={'ticket_id': tickets[0].id}, headers={'Authorization': mngstr})
     assert delete_query.status == '200 OK'
     user_tickets = client.get('/user_tickets', headers={'Authorization': usrstr})
-    assert len(user_tickets.get_json()) == 2
+    assert len(user_tickets.get_json()) == 1
 
 
 def test_manager_ticket_search(session, tickets, client, manager_token, user_token):

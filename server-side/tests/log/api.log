@@ -520,3 +520,575 @@ TypeError: 'Ticket' object is not iterable
 2020-09-11 00:26:23,694:app:INFO:manager 2 deleted ticket
 2020-09-11 00:26:29,896:app:INFO:manager 2  accessed tickets list
 2020-09-11 00:26:29,927:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:30:50,066:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:30:50,106:app:INFO:manager 2 verified ticket 4
+2020-09-11 15:30:50,121:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:30:54,766:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:30:55,966:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:30:55,996:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:31:01,186:app:WARNING:user: 1 - failed to delete ticket: unsupported operand type(s) for &: 'bool' and 'str'
+2020-09-11 15:31:08,006:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:31:08,046:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:49:15,847:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:49:15,878:app:INFO:manager 2 verified ticket 4
+2020-09-11 15:49:15,894:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:49:20,337:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:49:30,320:app:WARNING:user: 1 - failed to delete ticket: unsupported operand type(s) for &: 'bool' and 'str'
+2020-09-11 15:49:36,453:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:49:36,506:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:52:18,176:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:52:18,216:app:INFO:manager 2 verified ticket 4
+2020-09-11 15:52:18,226:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:52:22,456:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:52:23,615:app:ERROR:Exception on /place_ticket [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\main\views.py", line 110, in place_ticket
+    user = session.query(User).filter(kwargs.get('buyer_email')).one_or_none()
+  File "<string>", line 2, in filter
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\base.py", line 227, in generate
+    fn(self, *args[1:], **kw)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\query.py", line 1859, in filter
+    criterion = expression._expression_literal_as_text(criterion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4685, in _expression_literal_as_text
+    return _literal_as_text(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4708, in _literal_as_text
+    return _literal_as(element, _no_text_coercion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4694, in _literal_as
+    return text_fallback(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4735, in _no_text_coercion
+    util.raise_(
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
+    raise exception
+sqlalchemy.exc.ArgumentError: Textual SQL expression 'randomerg.ru' should be explicitly declared as text('randomerg.ru')
+2020-09-11 15:52:29,935:app:INFO:user 1 deleted ticket
+2020-09-11 15:52:35,228:app:INFO:manager 2  accessed tickets list
+2020-09-11 15:52:35,250:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:00:00,141:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:00:00,181:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:00:00,191:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:00:04,288:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:00:05,511:app:ERROR:Exception on /place_ticket [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\main\views.py", line 110, in place_ticket
+    user = session.query(User).filter(kwargs.get('buyer_email')).one_or_none()
+  File "<string>", line 2, in filter
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\base.py", line 227, in generate
+    fn(self, *args[1:], **kw)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\query.py", line 1859, in filter
+    criterion = expression._expression_literal_as_text(criterion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4685, in _expression_literal_as_text
+    return _literal_as_text(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4708, in _literal_as_text
+    return _literal_as(element, _no_text_coercion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4694, in _literal_as
+    return text_fallback(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4735, in _no_text_coercion
+    util.raise_(
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
+    raise exception
+sqlalchemy.exc.ArgumentError: Textual SQL expression 'randomerg.ru' should be explicitly declared as text('randomerg.ru')
+2020-09-11 16:00:16,541:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:00:16,581:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:05:19,451:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:05:19,481:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:05:19,491:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:05:23,950:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:05:25,081:app:ERROR:Exception on /place_ticket [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\main\views.py", line 110, in place_ticket
+    user = session.query(User).filter(kwargs.get('buyer_email')).one_or_none()
+  File "<string>", line 2, in filter
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\base.py", line 227, in generate
+    fn(self, *args[1:], **kw)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\query.py", line 1859, in filter
+    criterion = expression._expression_literal_as_text(criterion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4685, in _expression_literal_as_text
+    return _literal_as_text(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4708, in _literal_as_text
+    return _literal_as(element, _no_text_coercion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4694, in _literal_as
+    return text_fallback(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4735, in _no_text_coercion
+    util.raise_(
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
+    raise exception
+sqlalchemy.exc.ArgumentError: Textual SQL expression 'randomerg.ru' should be explicitly declared as text('randomerg.ru')
+2020-09-11 16:05:36,632:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:05:36,667:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:10:07,847:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:10:07,897:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:10:07,906:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:10:11,922:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:10:13,187:app:ERROR:Exception on /place_ticket [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\main\views.py", line 110, in place_ticket
+    user = session.query(User).filter(kwargs.get('buyer_email')).one_or_none()
+  File "<string>", line 2, in filter
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\base.py", line 227, in generate
+    fn(self, *args[1:], **kw)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\query.py", line 1859, in filter
+    criterion = expression._expression_literal_as_text(criterion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4685, in _expression_literal_as_text
+    return _literal_as_text(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4708, in _literal_as_text
+    return _literal_as(element, _no_text_coercion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4694, in _literal_as
+    return text_fallback(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4735, in _no_text_coercion
+    util.raise_(
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
+    raise exception
+sqlalchemy.exc.ArgumentError: Textual SQL expression 'randomerg.ru' should be explicitly declared as text('randomerg.ru')
+2020-09-11 16:10:24,226:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:10:24,257:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:14:44,386:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:14:44,426:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:14:44,436:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:14:48,676:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:14:50,191:app:ERROR:Exception on /place_ticket [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\main\views.py", line 110, in place_ticket
+    user = session.query(User).filter(kwargs.get('buyer_email')).one_or_none()
+  File "<string>", line 2, in filter
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\base.py", line 227, in generate
+    fn(self, *args[1:], **kw)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\query.py", line 1859, in filter
+    criterion = expression._expression_literal_as_text(criterion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4685, in _expression_literal_as_text
+    return _literal_as_text(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4708, in _literal_as_text
+    return _literal_as(element, _no_text_coercion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4694, in _literal_as
+    return text_fallback(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4735, in _no_text_coercion
+    util.raise_(
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
+    raise exception
+sqlalchemy.exc.ArgumentError: Textual SQL expression 'randomerg.ru' should be explicitly declared as text('randomerg.ru')
+2020-09-11 16:15:02,326:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:15:02,366:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:16:21,826:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:16:21,856:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:16:21,866:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:16:25,986:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:16:27,326:app:ERROR:Exception on /place_ticket [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\main\views.py", line 110, in place_ticket
+    user = session.query(User).filter(kwargs.get('buyer_email')).one_or_none()
+  File "<string>", line 2, in filter
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\base.py", line 227, in generate
+    fn(self, *args[1:], **kw)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\query.py", line 1859, in filter
+    criterion = expression._expression_literal_as_text(criterion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4685, in _expression_literal_as_text
+    return _literal_as_text(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4708, in _literal_as_text
+    return _literal_as(element, _no_text_coercion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4694, in _literal_as
+    return text_fallback(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4735, in _no_text_coercion
+    util.raise_(
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
+    raise exception
+sqlalchemy.exc.ArgumentError: Textual SQL expression 'randomerg.ru' should be explicitly declared as text('randomerg.ru')
+2020-09-11 16:16:36,203:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:16:36,234:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:20:27,079:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:20:27,100:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:20:27,106:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:20:30,403:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:20:31,399:app:ERROR:Exception on /place_ticket [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\main\views.py", line 110, in place_ticket
+    user = session.query(User).filter(kwargs.get('buyer_email')).one_or_none()
+  File "<string>", line 2, in filter
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\base.py", line 227, in generate
+    fn(self, *args[1:], **kw)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\query.py", line 1859, in filter
+    criterion = expression._expression_literal_as_text(criterion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4685, in _expression_literal_as_text
+    return _literal_as_text(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4708, in _literal_as_text
+    return _literal_as(element, _no_text_coercion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4694, in _literal_as
+    return text_fallback(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4735, in _no_text_coercion
+    util.raise_(
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
+    raise exception
+sqlalchemy.exc.ArgumentError: Textual SQL expression 'randomerg.ru' should be explicitly declared as text('randomerg.ru')
+2020-09-11 16:20:37,602:app:INFO:user 1 deleted ticket
+2020-09-11 16:20:37,632:app:INFO:user 2 deleted ticket
+2020-09-11 16:20:42,906:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:20:42,942:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:22:14,491:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:22:14,521:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:22:14,531:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:22:18,451:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:22:19,622:app:ERROR:Exception on /place_ticket [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\main\views.py", line 110, in place_ticket
+    user = session.query(User).filter(kwargs.get('buyer_email')).one_or_none()
+  File "<string>", line 2, in filter
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\base.py", line 227, in generate
+    fn(self, *args[1:], **kw)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\query.py", line 1859, in filter
+    criterion = expression._expression_literal_as_text(criterion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4685, in _expression_literal_as_text
+    return _literal_as_text(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4708, in _literal_as_text
+    return _literal_as(element, _no_text_coercion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4694, in _literal_as
+    return text_fallback(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4735, in _no_text_coercion
+    util.raise_(
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
+    raise exception
+sqlalchemy.exc.ArgumentError: Textual SQL expression 'randomerg.ru' should be explicitly declared as text('randomerg.ru')
+2020-09-11 16:22:25,192:app:INFO:user 1 deleted ticket
+2020-09-11 16:22:25,232:app:INFO:user 2 deleted ticket
+2020-09-11 16:22:30,366:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:22:30,392:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:25:13,030:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:25:13,091:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:25:13,105:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:25:15,470:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:25:16,425:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 16:25:16,435:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 16:25:22,245:app:INFO:user 1 deleted ticket
+2020-09-11 16:25:22,431:app:INFO:user 2 deleted ticket
+2020-09-11 16:25:27,905:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:25:27,935:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:27:18,025:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:27:18,105:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:27:18,145:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:27:22,226:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:27:23,405:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 16:27:23,415:app:ERROR:Exception on /place_ticket [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\main\views.py", line 110, in place_ticket
+    user = session.query(User).filter(kwargs.get('buyer_email')).one_or_none()
+  File "<string>", line 2, in filter
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\base.py", line 227, in generate
+    fn(self, *args[1:], **kw)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\orm\query.py", line 1859, in filter
+    criterion = expression._expression_literal_as_text(criterion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4685, in _expression_literal_as_text
+    return _literal_as_text(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4708, in _literal_as_text
+    return _literal_as(element, _no_text_coercion)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4694, in _literal_as
+    return text_fallback(element)
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\sql\elements.py", line 4735, in _no_text_coercion
+    util.raise_(
+  File "c:\program files\python38\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
+    raise exception
+sqlalchemy.exc.ArgumentError: Textual SQL expression 'testmail@mail.com' should be explicitly declared as text('testmail@mail.com')
+2020-09-11 16:27:30,215:app:INFO:user 1 deleted ticket
+2020-09-11 16:27:30,255:app:INFO:user 2 deleted ticket
+2020-09-11 16:27:35,295:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:27:35,335:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:32:46,958:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:32:46,998:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:32:47,008:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:32:51,088:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:32:52,298:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 16:32:58,228:app:INFO:user 1 deleted ticket
+2020-09-11 16:32:58,268:app:INFO:user 2 deleted ticket
+2020-09-11 16:33:03,653:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:33:03,678:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:34:44,549:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:34:44,581:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:34:44,596:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:34:48,735:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:34:49,985:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 16:34:50,001:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 16:34:56,058:app:INFO:user 1 deleted ticket
+2020-09-11 16:34:56,080:app:INFO:user 2 deleted ticket
+2020-09-11 16:35:01,157:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:35:01,179:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:37:26,591:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:37:26,622:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:37:26,638:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:37:30,550:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:37:31,722:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 16:37:31,722:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 16:37:37,254:app:INFO:user 1 deleted ticket
+2020-09-11 16:37:37,285:app:INFO:user 2 deleted ticket
+2020-09-11 16:37:42,335:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:37:42,358:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:38:59,202:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:38:59,233:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:38:59,249:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:39:03,129:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:39:04,417:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 16:39:04,433:app:ERROR:Exception on /place_ticket [POST]
+Traceback (most recent call last):
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\feruc\AppData\Roaming\Python\Python38\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\program files\python38\lib\site-packages\flask_jwt_extended\view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\decorators.py", line 14, in decorated_f
+    return f(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\annotations.py", line 118, in wrapped
+    return wrapper(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 33, in __call__
+    response = self.call_view(*args, **kwargs)
+  File "c:\program files\python38\lib\site-packages\flask_apispec\wrapper.py", line 56, in call_view
+    return self.func(*args, **kwargs)
+  File "C:\localhost\GitHub\feruc\RaillWayTickets\server-side\app\routes\main\views.py", line 113, in place_ticket
+    user_id = user[0].id
+TypeError: 'User' object is not subscriptable
+2020-09-11 16:39:10,008:app:INFO:user 1 deleted ticket
+2020-09-11 16:39:10,046:app:INFO:user 2 deleted ticket
+2020-09-11 16:39:14,585:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:39:14,616:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:40:43,265:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:40:43,296:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:40:43,296:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:40:47,107:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:40:48,310:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 16:40:48,379:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:40:53,969:app:INFO:user 1 deleted ticket
+2020-09-11 16:40:54,007:app:INFO:user 2 deleted ticket
+2020-09-11 16:40:59,253:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:40:59,284:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:41:47,078:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:41:47,109:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:41:47,125:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:41:51,120:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:41:52,324:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 16:41:52,386:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:41:52,408:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:41:57,447:app:INFO:user 1 deleted ticket
+2020-09-11 16:41:57,478:app:INFO:user 2 deleted ticket
+2020-09-11 16:42:02,545:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:42:02,575:app:INFO:manager 2  accessed tickets list

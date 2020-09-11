@@ -9,11 +9,10 @@ def manager_level_access(f):
     def decorated_f(*args, **kwargs):
         user_id = get_jwt_identity()
         user = session.query(User).get(user_id)
-        if user.role != 'manager':
+        if check_access() != 'manager':
             return make_response({"msg": "no access to ticket deletion"},401)
         return f(*args, **kwargs)
     return decorated_f
-
 
 def session_use_decorator(f):
 
@@ -22,3 +21,9 @@ def session_use_decorator(f):
         f(*args,**kwargs)
         session_lock.release()
     return decorated_f
+
+
+def check_access():
+    user_id = get_jwt_identity()
+    user = session.query(User).get(user_id)
+    return user.role

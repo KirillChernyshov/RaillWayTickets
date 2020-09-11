@@ -70,7 +70,7 @@ def get_empty_places(**kwargs):
 @main.route('/book_ticket', methods=['POST'])
 @doc(tag=['pet'], description='for booking a ticket')
 @jwt_required
-@use_kwargs(TicketBookingSchema)
+@use_kwargs(TicketBookingSchema(exclude=["buyer_email"]))
 @marshal_with(StatusMessageSchema)
 def book_ticket(**kwargs):
     user_id = get_jwt_identity()
@@ -104,8 +104,14 @@ def book_ticket(**kwargs):
 @use_kwargs(TicketBookingSchema)
 @marshal_with(StatusMessageSchema)
 def place_ticket(**kwargs):
-    print(kwargs.get('place'))
-    ticket = Ticket(user_id=None, **kwargs)
+    if kwargs.get('buyer_email') is None:
+        user_id = None
+    else:
+        user = session.query(User).filter(User.email == kwargs.get('buyer_email')).one_or_none()
+        if user is None:
+            return {'msg': "no user with this email"}, 400
+        user_id = user.id
+    ticket = Ticket(user_id=user_id, **kwargs)
     try:
         session.add(ticket)
         session.commit()
@@ -113,7 +119,7 @@ def place_ticket(**kwargs):
         session.rollback()
         logger.warning(
             f'ticket booking failed with errors: {e}')
-        return {'message': str(e)}, 400
+        return {'msg': str(e)}, 400
     return make_response({'msg': 'ticket succesfully booked'}, 200)
 
 
