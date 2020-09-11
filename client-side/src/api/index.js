@@ -18,15 +18,26 @@ export function getCities() {
     return axios.get(`${url}/cities`);
 }
 
+export function getProfile() {
+    return axios.get(`${url}/profile`);
+}
+
 export function searchRoutes(data) {
     return axios.post(`${url}/search`, data);
 }
 
 export function getRouteInfo(data) {
-    return axios.get(`${url}/get_route_info`, data);
+    return axios.post(`${url}/get_route_info`, data);
 }
 
 export function getTickets(data) {
-    console.log(data);
     return axios.post(`${url}/search_tickets`, data);
+}
+
+export function bookTicket(data) {
+    return axios.post(`${url}/book_ticket`, data);
+}
+
+export function deleteTicket(data) {
+    return axios.delete(`${url}/delete_ticket`, data);
 }

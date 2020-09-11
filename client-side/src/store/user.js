@@ -1,4 +1,4 @@
-import { userTickets } from '../api/index.js'
+import { userTickets, getProfile, deleteTicket } from '../api/index.js'
 import axios from 'axios'
 import moment from 'moment';
 
@@ -11,6 +11,7 @@ export default {
             access_token: null,
             role: null,
         },
+        email: '',
         tickets: [],
     },
     getters: {
@@ -61,6 +62,7 @@ export default {
                 ...ticket,
                 departure_time: moment(ticket.departure_time).format("DD.MM.YYYY HH:mm"),
                 arrival_time: moment(ticket.arrival_time).format("DD.MM.YYYY HH:mm"),
+                is_booked: (ticket.is_booked) ? 'Забронирован' : 'Оформлен',
             }));
 
             // for (let i = 0; i < 100; i++) {
@@ -81,7 +83,6 @@ export default {
             userTickets()
                 .then(res => {
                     console.log("userTickets");
-                    console.log(res.data);
                     commit('setTickets', res.data);
                 })
                 .catch(er => {
@@ -89,8 +90,21 @@ export default {
 
                 })
         },
-        cancelTicketReservation({ commit }, id) {
-            commit('removeTicket', id);
+        cancelTicketReservation({ dispatch }, id) {
+            deleteTicket({ ticket_id: id })
+                .then(() => {
+                    //commit('removeTicket', id);
+                    dispatch('user/getUserTickets');
+                })
+                .catch(err => {
+                    console.log(err.response);
+                })
+        },
+        getProfile({ state }) {
+            getProfile()
+                .then(res => {
+                    state.email = res.data.email;
+                })
         }
     }
 }

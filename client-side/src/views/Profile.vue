@@ -4,13 +4,14 @@
             <b-avatar variant="primary" :text="avatar" size="100px"></b-avatar>
             <div class="info">
                 <div class="name">{{ firstname}} {{ lastname }}</div>
+                <div>{{ email }}</div>
                 <div>{{ dRole }}</div>
             </div>
         </div>
         <b-table v-if="tickets.length" sticky-header class="align-left" striped hover :items="tickets" :fields="fields">
             <template v-slot:cell(actions)="row">
                 <b-button size="sm" @click="cancelReservation(row.item.ticket_id)" class="mr-2">
-                  Отменить бронирование
+                 x
                 </b-button>
             </template>
         </b-table>
@@ -58,8 +59,12 @@ export default {
                 label: "Цена"
             },
             {
+                key: "is_booked",
+                label: "Статус"
+            },
+            {
                 key: "actions",
-                label: "Действия"
+                label: "Отмена"
             }
         ],
     }),
@@ -69,6 +74,7 @@ export default {
             lastname: state => state.user.local.lastname,
             role: state => state.user.local.role,
             tickets: state => state.user.tickets,
+            email: state => state.user.email,
         }),
         avatar() {
             return this.firstname[0] + this.lastname[0];
@@ -88,7 +94,7 @@ export default {
         }
     },
     created() {
-
+        this.$store.dispatch('user/getProfile');
         this.$store.dispatch('user/getUserTickets');
     }
 }

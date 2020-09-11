@@ -1,4 +1,4 @@
-import { getRouteInfo } from '../api/index.js'
+import { getRouteInfo, bookTicket } from '../api/index.js'
 
 export default {
     namespaced: true,
@@ -11,7 +11,10 @@ export default {
             departure_time: '',
             arr_station_name: '',
             arrival_time: '',
-        }
+            arr_stop_id: '',
+            dep_stop_id: '',
+        },
+        wagon_seats_info: [],
     },
     mutations: {
         showBookTicket(state, data) {
@@ -23,6 +26,9 @@ export default {
             state.data = {};
             state.show = false;
             console.log('bookTicket/hideBookTicket');
+        },
+        setWagonInfo(state, data) {
+            state.wagon_seats_info = data;
         }
     },
     actions: {
@@ -30,12 +36,22 @@ export default {
             getRouteInfo(data)
                 .then(res => {
                     console.log("bookTicket/getRouteInfo");
-                    console.log(res.data);
-                    commit();
+                    commit("setWagonInfo", res.data.wagon_seats_info);
                 })
                 .catch(err => {
                     console.log(err.response);
                 });
+        },
+        bookTicket({ dispatch }, data) {
+            bookTicket(data)
+            .then(() => {
+                console.log("bookTicket/bookTicket");
+                dispatch();
+                //commit("setWagonInfo", res.data.wagon_seats_info);
+            })
+            .catch(err => {
+                console.log(err.response);
+            });
         }
     }
 }
