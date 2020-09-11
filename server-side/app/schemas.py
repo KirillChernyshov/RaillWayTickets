@@ -39,6 +39,7 @@ class WagonSeatsInfoSchema(Schema):
 
 class TrainSeatsResponse(Schema):
     wagon_seats_info = fields.List(fields.Nested(WagonSeatsInfoSchema,required=True))
+    train_id = fields.Integer(required=True)
 
 
 class RouteInfoSchema(Schema):

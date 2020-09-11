@@ -8,6 +8,7 @@ from app.model import *
 from datetime import datetime
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from .route_search import *
+from app.decorators import manager_level_access
 
 main = Blueprint('main', __name__)
 
@@ -86,8 +87,33 @@ def book_ticket(**kwargs):
     print(book_end_date)
     print(kwargs.get('place'))
     ticket = Ticket(user_id=user_id, book_end_date=book_end_date, **kwargs)
-    session.add(ticket)
-    session.commit()
+    try:
+        session.add(ticket)
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        logger.warning(
+            f'ticket booking failed with errors: {e}')
+        return {'message': str(e)}, 400
+    return make_response({'msg': 'ticket succesfully booked'}, 200)
+
+@main.route('/place_ticket', methods=['POST'])
+@doc(tag=['pet'], description='for booking a ticket')
+@jwt_required
+@manager_level_access
+@use_kwargs(TicketBookingSchema)
+@marshal_with(StatusMessageSchema)
+def place_ticket(**kwargs):
+    print(kwargs.get('place'))
+    ticket = Ticket(user_id=None, **kwargs)
+    try:
+        session.add(ticket)
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        logger.warning(
+            f'ticket booking failed with errors: {e}')
+        return {'message': str(e)}, 400
     return make_response({'msg': 'ticket succesfully booked'}, 200)
 
 
@@ -103,6 +129,7 @@ def handle_error(err):
 
 
 docs.register(get_schedules, blueprint="main")
+docs.register(place_ticket, blueprint="main")
 docs.register(book_ticket, blueprint='main')
 docs.register(get_empty_places, blueprint='main')
 docs.register(get_cities, blueprint='main')
@@ -143,7 +170,8 @@ def serialize_seats_info(wagons_stat, schedule, arr_stop, dep_stop):
     arr_station_name = session.query(Station.name).filter(Station.id == arr_stop.station_id).one_or_none()
     dep_station_name = session.query(Station.name).filter(Station.id == dep_stop.station_id).one_or_none()
     route_name = session.query(BaseRoute.name).one_or_none()
-    route_info_dict = {'wagon_seats_info': empty_seats_info}
+    train_id = session.query(Train).get(schedule.train_id).id
+    route_info_dict = {'train_id':schedule.train_id,'wagon_seats_info': empty_seats_info}
     return route_info_dict
 
 

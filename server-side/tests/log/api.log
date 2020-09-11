@@ -467,3 +467,56 @@ TypeError: 'Ticket' object is not iterable
 2020-09-10 23:12:21,728:app:INFO:manager 2 deleted ticket
 2020-09-10 23:12:27,363:app:INFO:manager 2  accessed tickets list
 2020-09-10 23:12:27,398:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:25:53,688:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:25:59,988:app:INFO:manager 2 deleted ticket
+2020-09-10 23:26:05,459:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:26:05,479:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:30:09,626:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:30:15,507:app:INFO:manager 2 deleted ticket
+2020-09-10 23:30:19,976:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:30:20,007:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:31:21,576:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:31:27,456:app:INFO:manager 2 deleted ticket
+2020-09-10 23:31:32,771:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:31:32,806:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:37:41,576:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:37:47,965:app:INFO:manager 2 deleted ticket
+2020-09-10 23:37:53,751:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:37:53,775:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:39:35,316:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:39:35,355:app:WARNING:manager: 2 - failed to verify ticket: Entity '<class 'app.model.Ticket'>' has no property 'booking_end_date'
+2020-09-10 23:39:41,400:app:INFO:manager 2 deleted ticket
+2020-09-10 23:39:46,944:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:39:46,971:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:41:55,332:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:41:55,380:app:INFO:manager 2 verified ticket 4
+2020-09-10 23:41:55,386:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:42:01,995:app:INFO:manager 2 deleted ticket
+2020-09-10 23:42:08,475:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:42:08,525:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:42:56,594:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:42:56,639:app:INFO:manager 2 verified ticket 4
+2020-09-10 23:42:56,644:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:43:03,439:app:INFO:manager 2 deleted ticket
+2020-09-10 23:43:19,089:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:43:19,129:app:INFO:manager 2 verified ticket 4
+2020-09-10 23:43:19,144:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:43:24,629:app:INFO:manager 2 deleted ticket
+2020-09-10 23:43:29,589:app:INFO:manager 2  accessed tickets list
+2020-09-10 23:43:29,629:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:24:36,086:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:24:36,124:app:INFO:manager 2 verified ticket 4
+2020-09-11 00:24:36,124:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:24:40,167:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:24:46,774:app:INFO:manager 2 deleted ticket
+2020-09-11 00:24:52,104:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:24:52,142:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:12,612:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:12,659:app:INFO:manager 2 verified ticket 4
+2020-09-11 00:26:12,675:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:16,840:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:18,333:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:18,370:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:23,694:app:INFO:manager 2 deleted ticket
+2020-09-11 00:26:29,896:app:INFO:manager 2  accessed tickets list
+2020-09-11 00:26:29,927:app:INFO:manager 2  accessed tickets list
