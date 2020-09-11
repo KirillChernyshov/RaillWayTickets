@@ -90,8 +90,11 @@ export default {
     },
     methods: {
         cancelReservation(id) {
-            this.$store.dispatch('confirmationTickets/cancelReservation', id);
-            this.$store.dispatch('user/getUserTickets');
+            this.$store.dispatch('confirmationTickets/cancelReservation', id)
+                .then(() => {
+                    this.$store.dispatch('user/getUserTickets');
+                })
+            //this.$store.commit('user/setTickets', []);
         }
     },
     created() {

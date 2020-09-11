@@ -47,6 +47,5 @@ export function deleteTicket(data) {
 }
 
 export function verifyTicket(data) {
-    console.log(data);
     return axios.post(`${url}/verify_ticket`, data);
 }
