@@ -80,7 +80,10 @@ def mockup():
         Ticket(departure_stop_id=stops[2].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[0].id, place=2,
                schedule_id=schedules[0].id, is_booked=False, user_id=users[0].id),
         Ticket(departure_stop_id=stops[1].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[1].id, place=3,
-               schedule_id=schedules[0].id, is_booked=False, user_id=users[0].id)]
+               schedule_id=schedules[0].id, is_booked=False, user_id=users[0].id),
+        Ticket(departure_stop_id=stops[0].id, arrival_stop_id=stops[3].id, cost=34, wagon_id=wagons[1].id, place=1,
+               schedule_id=schedules[0].id, is_booked=True, user_id=users[0].id,
+               book_end_date=datetime(2020, 9, 25, 0, 0))]
     session.add_all(tickets)
     session.commit()
 

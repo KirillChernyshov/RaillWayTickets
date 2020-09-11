@@ -1092,3 +1092,159 @@ TypeError: 'User' object is not subscriptable
 2020-09-11 16:41:57,478:app:INFO:user 2 deleted ticket
 2020-09-11 16:42:02,545:app:INFO:manager 2  accessed tickets list
 2020-09-11 16:42:02,575:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:56:35,942:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:56:35,992:app:INFO:manager 2 verified ticket 4
+2020-09-11 16:56:36,007:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:56:40,232:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:56:41,452:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 16:56:41,502:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:56:41,542:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:56:46,712:app:INFO:user 1 deleted ticket
+2020-09-11 16:56:46,742:app:INFO:user 2 deleted ticket
+2020-09-11 16:56:52,262:app:INFO:manager 2  accessed tickets list
+2020-09-11 16:56:52,296:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:00:00,927:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:00:00,962:app:INFO:manager 2 verified ticket 4
+2020-09-11 17:00:00,976:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:00:04,886:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:00:06,051:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 17:00:06,112:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:00:06,141:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:00:11,191:app:INFO:user 1 deleted ticket
+2020-09-11 17:00:11,221:app:INFO:user 2 deleted ticket
+2020-09-11 17:00:16,421:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:00:16,451:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:41:22,467:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:41:22,514:app:INFO:manager 2 verified ticket 4
+2020-09-11 17:41:22,529:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:41:27,167:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:41:28,386:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 17:41:28,440:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:41:28,471:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:41:33,580:app:INFO:user 1 deleted ticket
+2020-09-11 17:41:33,611:app:INFO:user 2 deleted ticket
+2020-09-11 17:41:38,810:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:41:38,841:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:42:12,520:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:42:12,551:app:INFO:manager 2 verified ticket 4
+2020-09-11 17:42:12,566:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:42:16,829:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:42:17,994:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 17:42:18,048:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:42:18,079:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:42:23,528:app:INFO:user 1 deleted ticket
+2020-09-11 17:42:23,553:app:INFO:user 2 deleted ticket
+2020-09-11 17:42:28,800:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:42:28,831:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:43:52,149:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:43:52,196:app:INFO:manager 2 verified ticket 4
+2020-09-11 17:43:52,196:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:43:56,662:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:43:57,828:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 17:43:57,881:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:43:57,912:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:44:03,281:app:INFO:user 1 deleted ticket
+2020-09-11 17:44:03,998:app:INFO:user 2 deleted ticket
+2020-09-11 17:44:10,457:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:44:10,488:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:44:49,030:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:44:49,068:app:INFO:manager 2 verified ticket 4
+2020-09-11 17:44:49,068:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:44:53,609:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:44:54,781:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 17:44:54,843:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:44:54,881:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:45:02,527:app:INFO:user 1 deleted ticket
+2020-09-11 17:45:02,565:app:INFO:user 2 deleted ticket
+2020-09-11 17:45:07,645:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:45:07,674:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:47:27,378:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:47:27,409:app:INFO:manager 2 verified ticket 4
+2020-09-11 17:47:27,425:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:47:31,991:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:47:33,326:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 17:47:33,380:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:47:33,411:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:47:38,439:app:INFO:user 1 deleted ticket
+2020-09-11 17:47:38,480:app:INFO:user 2 deleted ticket
+2020-09-11 17:47:42,892:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:47:42,908:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:48:53,955:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:48:53,986:app:INFO:manager 2 verified ticket 4
+2020-09-11 17:48:54,002:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:48:57,782:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:48:58,936:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 17:48:58,980:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:48:59,011:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:49:04,104:app:INFO:user 1 deleted ticket
+2020-09-11 17:49:04,129:app:INFO:user 2 deleted ticket
+2020-09-11 17:49:09,117:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:49:09,146:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:49:59,009:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:49:59,047:app:INFO:manager 2 verified ticket 4
+2020-09-11 17:49:59,047:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:50:03,384:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:50:04,551:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 17:50:04,602:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:50:04,625:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:50:09,653:app:INFO:user 1 deleted ticket
+2020-09-11 17:50:09,679:app:INFO:user 2 deleted ticket
+2020-09-11 17:50:14,829:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:50:14,852:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:50:52,643:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:50:52,674:app:INFO:manager 2 verified ticket 4
+2020-09-11 17:50:52,674:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:50:57,449:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:50:58,706:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 17:50:58,753:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:50:58,791:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:51:04,117:app:INFO:user 1 deleted ticket
+2020-09-11 17:51:04,148:app:INFO:user 2 deleted ticket
+2020-09-11 17:51:09,464:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:51:09,502:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:52:42,867:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:52:42,882:app:INFO:manager 2 verified ticket 4
+2020-09-11 17:52:42,898:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:52:47,223:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:52:48,512:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 17:52:48,566:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:52:48,597:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:52:54,139:app:INFO:user 1 deleted ticket
+2020-09-11 17:52:54,170:app:INFO:user 2 deleted ticket
+2020-09-11 17:52:59,252:app:INFO:manager 2  accessed tickets list
+2020-09-11 17:52:59,283:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:28:05,029:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:28:05,066:app:INFO:manager 2 verified ticket 4
+2020-09-11 18:28:05,066:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:28:09,461:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:28:10,664:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 18:28:10,727:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:28:10,765:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:28:15,503:app:INFO:user 1 deleted ticket
+2020-09-11 18:28:15,519:app:INFO:user 2 deleted ticket
+2020-09-11 18:28:20,604:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:28:20,635:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:29:24,931:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:29:25,004:app:INFO:manager 2 verified ticket 4
+2020-09-11 18:29:25,020:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:29:25,035:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:29:29,669:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:29:31,011:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 18:29:31,070:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:29:31,111:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:29:36,634:app:INFO:user 1 deleted ticket
+2020-09-11 18:29:36,666:app:INFO:user 2 deleted ticket
+2020-09-11 18:29:41,820:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:29:41,851:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:33:44,484:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:33:44,515:app:INFO:manager 2 verified ticket 4
+2020-09-11 18:33:44,531:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:33:44,538:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:33:49,041:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:33:49,668:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-11 18:33:49,699:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:33:49,721:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:33:53,959:app:INFO:user 1 deleted ticket
+2020-09-11 18:33:53,992:app:INFO:user 2 deleted ticket
+2020-09-11 18:33:56,691:app:INFO:manager 2  accessed tickets list
+2020-09-11 18:33:56,700:app:INFO:manager 2  accessed tickets list
