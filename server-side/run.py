@@ -23,18 +23,18 @@ class StoppableThread(threading.Thread):
 
     def run(self):
         while self.stopped() is False:
-            logger.info('thread begins the proccess')
+            logger.info(f'thread {threading.get_ident()} begins the proccess')
             session_lock.acquire()
             now = datetime.now()
-            tickets_to_delete = session.query(Ticket).filter(Ticket.book_end_date > now).all()
+            tickets_to_delete = session.query(Ticket).filter(Ticket.book_end_date < now).all()
             if len(tickets_to_delete) != 0:
                 print(str(len(tickets_to_delete)) + " outdated bookings found, commence deletion")
             for ticket in tickets_to_delete:
                 session.delete(ticket)
             session.commit()
             session_lock.release()
-            logger.info('thread proccess completed')
-            self._stop_event.wait(4)
+            logger.info(f'thread {threading.get_ident()} proccess completed')
+            self._stop_event.wait(60)
         logger.info('dataclean thread has stopped')
 
 # app = create_app()
