@@ -1,4 +1,5 @@
 from datetime import datetime
+from werkzeug.serving import is_running_from_reloader
 from app import app, session, logger, session_lock
 from app.model import *
 import threading
@@ -28,12 +29,13 @@ class StoppableThread(threading.Thread):
             now = datetime.now()
             tickets_to_delete = session.query(Ticket).filter(Ticket.book_end_date < now).all()
             if len(tickets_to_delete) != 0:
-                print(str(len(tickets_to_delete)) + " outdated bookings found, commence deletion")
+                print(str(len(tickets_to_delete)) +
+                      f" outdated bookings found by thread {threading.get_ident()}, commence deletion")
             for ticket in tickets_to_delete:
                 session.delete(ticket)
             session.commit()
             session_lock.release()
-            logger.info(f'thread {threading.get_ident()} proccess completed')
+            logger.info(f'thread {threading.get_ident()} enters sleep')
             self._stop_event.wait(60)
         logger.info('dataclean thread has stopped')
 
@@ -86,6 +88,8 @@ def mockup():
 if __name__ == '__main__':
     database_cleaning_thread = StoppableThread()
     database_cleaning_thread.setDaemon(True)
-    database_cleaning_thread.start()
+    if(is_running_from_reloader()):
+        database_cleaning_thread.start()
     app.run(debug=True)
-    database_cleaning_thread.stop()
+    if (is_running_from_reloader()):
+        database_cleaning_thread.stop()
