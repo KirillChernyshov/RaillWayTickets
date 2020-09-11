@@ -1,4 +1,4 @@
-import { userTickets, getProfile, deleteTicket } from '../api/index.js'
+import { userTickets, getProfile } from '../api/index.js'
 import axios from 'axios'
 import moment from 'moment';
 
@@ -88,16 +88,6 @@ export default {
                 .catch(er => {
                     console.log(er.response);
 
-                })
-        },
-        cancelTicketReservation({ dispatch }, id) {
-            deleteTicket({ ticket_id: id })
-                .then(() => {
-                    //commit('removeTicket', id);
-                    dispatch('user/getUserTickets');
-                })
-                .catch(err => {
-                    console.log(err.response);
                 })
         },
         getProfile({ state }) {

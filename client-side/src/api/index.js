@@ -38,6 +38,15 @@ export function bookTicket(data) {
     return axios.post(`${url}/book_ticket`, data);
 }
 
+export function issueTicket(data) {
+    return axios.post(`${url}/place_ticket`, data);
+}
+
 export function deleteTicket(data) {
-    return axios.delete(`${url}/delete_ticket`, data);
+    return axios.post(`${url}/delete_ticket`, data);
+}
+
+export function verifyTicket(data) {
+    console.log(data);
+    return axios.post(`${url}/verify_ticket`, data);
 }

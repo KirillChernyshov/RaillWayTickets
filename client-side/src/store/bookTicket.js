@@ -1,4 +1,4 @@
-import { getRouteInfo, bookTicket } from '../api/index.js'
+import { getRouteInfo, bookTicket, issueTicket } from '../api/index.js'
 
 export default {
     namespaced: true,
@@ -57,6 +57,17 @@ export default {
             bookTicket(data)
             .then(() => {
                 console.log("bookTicket/bookTicket");
+                dispatch();
+                //commit("setWagonInfo", res.data.wagon_seats_info);
+            })
+            .catch(err => {
+                console.log(err.response);
+            });
+        },
+        issueTicket({ dispatch }, data) {
+            issueTicket(data)
+            .then(() => {
+                console.log("bookTicket/issueTicket");
                 dispatch();
                 //commit("setWagonInfo", res.data.wagon_seats_info);
             })

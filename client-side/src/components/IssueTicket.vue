@@ -1,10 +1,10 @@
 <template lang="html">
-    <b-modal id="book_ticket" title="Оформление билета"
+    <b-modal id="issue_ticket" title="Оформление билета"
         @hidden="hideIssueTicket"
         ok-only
         @ok="issueTicket"
     >
-        <b-row>
+        <!-- <b-row>
             <b-col sm="2">
                 <span>Имя:</span>
             </b-col>
@@ -19,7 +19,7 @@
             <b-col sm="8">
                 <b-input size="sm" v-model="lastname" ></b-input>
             </b-col>
-        </b-row>
+        </b-row> -->
         <div v-for="(item, key) in dataList" :key="key">
             <span>{{ item.header }}:</span> {{ item.value }}
         </div>
@@ -124,7 +124,7 @@ export default {
     watch: {
         show(val) {
             if (val) {
-                this.$bvModal.show('book_ticket');
+                this.$bvModal.show('issue_ticket');
                 // console.log(this.bookData);
                 this.$store.dispatch('bookTicket/getRouteInfo', {
                     arr_stop_id: this.bookData.arr_stop_id,
@@ -133,7 +133,7 @@ export default {
                 });
             }
             else
-                this.$bvModal.hide('book_ticket');
+                this.$bvModal.hide('issue_ticket');
         },
         seats(val) {
             if (val.length)
