@@ -50,6 +50,15 @@
                 >
                   Бронировать билет
                 </b-button>
+                <b-button
+                    v-if="role == 'manager'"
+                    size="sm"
+                    variant="info"
+                    @click="showIssueTicket(row.item)"
+                    class="mr-2"
+                >
+                 Оформить билет
+                </b-button>
             </template>
             <template v-slot:table-busy>
                 <div class="text-center text-info my-2">
@@ -60,6 +69,7 @@
         </b-table>
 
         <BookTicket v-bind="bookTicket" @search="search"/>
+        <IssueTicket v-bind="bookTicket" @search="search"/>
     </div>
 </template>
 
@@ -67,6 +77,7 @@
 import { mapState, mapMutations } from 'vuex'
 import moment from 'moment'
 import BookTicket from '../components/BookTicket.vue'
+import IssueTicket from '../components/IssueTicket.vue'
 
 export default {
     name: "timetable",
@@ -131,6 +142,7 @@ export default {
         },
         ...mapMutations('bookTicket', [
             'showBookTicket',
+            'showIssueTicket'
         ])
         // showBookTicket(data) {
         //     this.$store.commit('bookTicket/showBookTicket', data);
@@ -146,6 +158,7 @@ export default {
     },
     components: {
         BookTicket,
+        IssueTicket,
     },
     created() {
         this.$store.dispatch('timetable/getCitiesList');

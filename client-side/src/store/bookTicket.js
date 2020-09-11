@@ -4,6 +4,7 @@ export default {
     namespaced: true,
     state: {
         show: false,
+        showIssue: false,
         data: {
             route_name: '',
             schedule_id: '',
@@ -26,6 +27,16 @@ export default {
             state.data = {};
             state.show = false;
             console.log('bookTicket/hideBookTicket');
+        },
+        showIssueTicket(state, data) {
+            state.data = data;
+            state.showIssue = true;
+            console.log('bookTicket/showIssueTicket');
+        },
+        hideIssueTicket(state) {
+            state.data = {};
+            state.showIssue = false;
+            console.log('bookTicket/hideIssueTicket');
         },
         setWagonInfo(state, data) {
             state.wagon_seats_info = data;
