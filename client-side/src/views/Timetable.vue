@@ -42,6 +42,7 @@
         <b-table :busy="load" sticky-header class="align-left routes" striped hover :items="routes" :fields="fields">
             <template v-show="false" v-slot:cell(actions)="row">
                 <b-button
+                    v-if="role == 'client'"
                     size="sm"
                     variant="info"
                     @click="showBookTicket(row.item)"
@@ -58,7 +59,7 @@
             </template>
         </b-table>
 
-        <BookTicket v-bind="bookTicket" />
+        <BookTicket v-bind="bookTicket" @search="search"/>
     </div>
 </template>
 
