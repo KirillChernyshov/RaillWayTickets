@@ -87,7 +87,7 @@ def mockup():
     session.add_all(tickets)
     session.commit()
 
-
+#
 if __name__ == '__main__':
     database_cleaning_thread = StoppableThread()
     database_cleaning_thread.setDaemon(True)
