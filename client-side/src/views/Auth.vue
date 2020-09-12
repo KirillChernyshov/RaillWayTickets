@@ -71,11 +71,7 @@ export default {
                 data[key] = this.form[key].value
             }
 
-            this.$store.dispatch("auth/authorization", data)
-                .then(() => {
-                    window.ym(67271437,'reachGoal','login');
-                    console.log("loged");
-                });
+            this.$store.dispatch("auth/authorization", data);
         },
     }
 }
