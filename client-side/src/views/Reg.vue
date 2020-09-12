@@ -126,10 +126,10 @@ export default {
             }
 
             this.$store.dispatch("reg/registration", {
-                "email": this.form.email,
-                "firstname": this.form.firstname,
-                "lastname": this.form.lastname,
-                "password": this.form.password
+                "email": this.form.email.value,
+                "firstname": this.form.firstname.value,
+                "lastname": this.form.lastname.value,
+                "password": this.form.password.value
             });
         },
     }
