@@ -44,7 +44,7 @@ export default {
     max-width: 1024px;
     padding-top: 60px;
     padding-bottom: 3vh;
-    width: 120vh;
+    width: 100vw;
     /* height: 300vh; */
 }
 
