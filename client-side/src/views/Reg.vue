@@ -125,7 +125,12 @@ export default {
                 data[key] = this.form[key].value
             }
 
-            this.$store.dispatch("reg/registration", data);
+            this.$store.dispatch("reg/registration", {
+                "email": this.form.email,
+                "firstname": this.form.firstname,
+                "lastname": this.form.lastname,
+                "password": this.form.password
+            });
         },
     }
 }
