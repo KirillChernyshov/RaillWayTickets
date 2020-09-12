@@ -39,8 +39,8 @@ const routes = [
         component: () => import('../views/Timetable.vue'),
     },
     {
-        path: '/profile',
-        name: 'profile',
+        path: '/user-profile',
+        name: 'user-profile',
         component: () => import('../views/Profile.vue'),
         beforeEnter (to, from, next) {
             if (!localStorage.isAuth) {

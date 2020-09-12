@@ -23,7 +23,7 @@
 import { mapState } from 'vuex'
 
 export default {
-    name: "profile",
+    name: "user-profile",
     data: () => ({
         fields: [
             {

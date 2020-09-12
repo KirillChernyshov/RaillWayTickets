@@ -22,6 +22,17 @@ app = Flask(__name__,
             static_folder="./static/dist",
             template_folder="./static")
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("index.html")
+
+
+@app.route('/static/<path:path>')
+def static_dist(path):
+    # тут пробрасываем статику
+    return send_from_directory("/dist", path)
+
 app.config.from_object(Config)
 app.config.from_object(__name__)
 

@@ -123,7 +123,7 @@ export default {
         margin: auto auto 0 0;
     }
 
-    .tickets .routes {
+    .tickets .align-left {
         max-height: 70vh;
     }
 </style>
