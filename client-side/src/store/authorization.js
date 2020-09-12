@@ -12,10 +12,10 @@ export default {
             state.waiting = true;
                 authorization(data)
                     .then(res => {
+                        window.ym(67271437,'reachGoal','login');
                         console.log("authorization");
                         router.push("/");
                         commit("user/setUserData", res.data, { root: true });
-                        window.ym(67271437,'reachGoal','login');
                     })
                     .catch(er => {
                         if (er.response.status == 400)

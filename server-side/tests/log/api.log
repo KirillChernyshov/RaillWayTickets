@@ -1248,3 +1248,5 @@ TypeError: 'User' object is not subscriptable
 2020-09-11 18:33:53,992:app:INFO:user 2 deleted ticket
 2020-09-11 18:33:56,691:app:INFO:manager 2  accessed tickets list
 2020-09-11 18:33:56,700:app:INFO:manager 2  accessed tickets list
+2020-09-12 22:35:56,930:app:INFO:thread 13452 begins the proccess
+2020-09-12 23:25:53,657:app:INFO:thread 3212 begins the proccess
