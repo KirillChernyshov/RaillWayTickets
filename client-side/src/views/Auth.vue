@@ -74,6 +74,7 @@ export default {
             this.$store.dispatch("auth/authorization", data)
                 .then(() => {
                     window.ym(67271437,'reachGoal','login');
+                    console.log("loged");
                 });
         },
     }
