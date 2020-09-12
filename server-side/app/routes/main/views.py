@@ -231,9 +231,12 @@ def get_wagons_info(train_struc, wagon_types):
         for place_num in range(len(wagon_places)):
             if wagon_places[place_num]:
                 wagons_stat[wagon_id]['empty_places'].append(place_num + 1)
+        blacklist = []
         for wagon_num, wagon_stat in wagons_stat.items():
             if len(wagon_stat['empty_places']) == 0:
-                wagons_stat.pop(wagon_num)
+                blacklist.append(wagon_num)
+        for wagon_num in blacklist:
+            wagons_stat.pop(wagon_num)
     return wagons_stat
 
 
@@ -247,7 +250,10 @@ def get_empty_train_seats_info(train_struc, wagon_types):
         for place_num in range(len(wagon_places)):
             if wagon_places[place_num]:
                 places_stat[wagon_types[wagon_id]]['num_of_places'] += 1
+    blacklist = []
     for type_name, type_stat in places_stat.items():
         if type_stat['num_of_places'] == 0:
-            places_stat.pop(type_name)
+            blacklist.append(type_name)
+    for type_name in blacklist:
+        places_stat.pop(type_name)
     return places_stat
