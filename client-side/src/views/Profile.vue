@@ -23,7 +23,7 @@
 import { mapState } from 'vuex'
 
 export default {
-    name: "profile",
+    name: "user-profile",
     data: () => ({
         fields: [
             {
@@ -90,8 +90,11 @@ export default {
     },
     methods: {
         cancelReservation(id) {
-            this.$store.dispatch('confirmationTickets/cancelReservation', id);
-            this.$store.dispatch('user/getUserTickets');
+            this.$store.dispatch('confirmationTickets/cancelReservation', id)
+                .then(() => {
+                    this.$store.dispatch('user/getUserTickets');
+                })
+            //this.$store.commit('user/setTickets', []);
         }
     },
     created() {

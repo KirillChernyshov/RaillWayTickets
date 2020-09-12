@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let url = "http://localhost:5000"
+let url = ""//"http://localhost:5000"
 
 export function registration (data) {
     return axios.post(`${url}/register`, data)
@@ -47,6 +47,5 @@ export function deleteTicket(data) {
 }
 
 export function verifyTicket(data) {
-    console.log(data);
     return axios.post(`${url}/verify_ticket`, data);
 }

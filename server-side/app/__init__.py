@@ -22,6 +22,17 @@ app = Flask(__name__,
             static_folder="./static/dist",
             template_folder="./static")
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("index.html")
+
+
+@app.route('/static/<path:path>')
+def static_dist(path):
+    # тут пробрасываем статику
+    return send_from_directory("/dist", path)
+
 app.config.from_object(Config)
 app.config.from_object(__name__)
 
@@ -67,8 +78,7 @@ def setup_logger():
 
     formatter = logging.Formatter(
         '%(asctime)s:%(name)s:%(levelname)s:%(message)s')
-
-    file_handler = logging.FileHandler('log/api.log')
+    file_handler = logging.FileHandler('RaillWayTickets/server-side/tests/log/api.log')
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 

@@ -22,6 +22,7 @@ export default {
     },
     actions: {
         searchTickets({ commit }, data) {
+            console.log(data);
             getTickets(data)
                 .then(res => {
                     console.log("confirmationTickets/searchTickets");
@@ -32,29 +33,31 @@ export default {
                 })
         },
         cancelReservation({ dispatch }, id) {
-            deleteTicket({ ticket_id: id })
+            return new Promise((res, rej) => {
+                deleteTicket({ ticket_id: id })
                 .then(() => {
                     console.log("confirmationTickets/cancelReservation");
-                    // dispatch('user/getUserTickets');
-                    // dispatch('confirmationTickets/searchTickets');
+                    res();
                     dispatch();
                 })
                 .catch(err => {
                     console.log(err.response);
+                    rej();
                 })
+            });
         },
         confirmReservation({ state }, id) {
-            verifyTicket({ ticket_id: id })
-                .then(() => {
-                    // commit('removeTicket', id);
-                    // dispatch('user/getUserTickets');
-                    // dispatch('searchTickets');
-                    state;
-                })
-                .catch(err => {
-                    console.log("test");
-                    console.log(err);
-                })
+            return new Promise((res, rej) => {
+                verifyTicket({ ticket_id: id })
+                    .then(() => {
+                        state;
+                        res();
+                    })
+                    .catch(err => {
+                        rej();
+                        console.log(err);
+                    })
+            });
         },
     }
 }

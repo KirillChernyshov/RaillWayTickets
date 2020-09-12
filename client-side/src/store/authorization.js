@@ -10,22 +10,21 @@ export default {
     actions: {
         authorization({ state, commit }, data) {
             state.waiting = true;
-            data;
-            authorization(data)
-                .then(res => {
-                    console.log("authorization");
-                    router.push("/");
-                    commit("user/setUserData", res.data, { root: true });
-                })
-                .catch(er => {
-                    if (er.response.status == 400)
+                authorization(data)
+                    .then(res => {
+                        window.ym(67271437,'reachGoal','login');
+                        console.log("authorization");
+                        router.push("/");
+                        commit("user/setUserData", res.data, { root: true });
+                    })
+                    .catch(er => {
+                        if (er.response.status == 400)
                         state.error = "Не верный логин или пароль!";
                         state.waiting = false;
-
                         setTimeout(() => {
                             state.error = "";
                         }, 10000);
-                })
+                    })
         }
     }
 }

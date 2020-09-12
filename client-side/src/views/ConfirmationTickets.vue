@@ -95,12 +95,16 @@ export default {
             this.$store.dispatch('confirmationTickets/searchTickets', data);
         },
         cancelReservation(id) {
-            this.$store.dispatch('confirmationTickets/cancelReservation', id);
-            this.search();
+            this.$store.dispatch('confirmationTickets/cancelReservation', id)
+                .then(() => {
+                    this.search();
+                });
         },
         confirmReservation(id) {
-            this.$store.dispatch('confirmationTickets/confirmReservation', id);
-            this.search();
+            this.$store.dispatch('confirmationTickets/confirmReservation', id)
+                .then(() => {
+                    this.search();
+                });
         }
     }
 }
@@ -119,7 +123,7 @@ export default {
         margin: auto auto 0 0;
     }
 
-    .tickets .routes {
+    .tickets .align-left {
         max-height: 70vh;
     }
 </style>
