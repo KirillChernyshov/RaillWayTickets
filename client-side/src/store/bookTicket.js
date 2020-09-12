@@ -57,6 +57,7 @@ export default {
             bookTicket(data)
             .then(() => {
                 console.log("bookTicket/bookTicket");
+                window.ym(67271437,'reachGoal','book_ticket');
                 dispatch();
                 //commit("setWagonInfo", res.data.wagon_seats_info);
             })

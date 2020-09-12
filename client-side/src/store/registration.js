@@ -13,6 +13,7 @@ export default {
             registration(data)
                 .then(res => {
                     console.log("registration");
+                    window.ym(67271437,'reachGoal','register');
                     router.push("/");
                     commit("user/setUserData", res.data, { root: true });
                 })

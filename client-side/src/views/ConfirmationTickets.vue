@@ -2,7 +2,7 @@
     <div class="tickets">
         <b-form class="search" inline>
             <b-form-group
-                label="Станция отбытия"
+                label="Почта пользователя или идентификатор билета"
             >
                 <b-form-input
                     v-model="identificator"

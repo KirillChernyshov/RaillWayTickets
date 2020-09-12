@@ -51,6 +51,7 @@ export default {
                 verifyTicket({ ticket_id: id })
                     .then(() => {
                         state;
+                        window.ym(67271437,'reachGoal','verify_ticket');
                         res();
                     })
                     .catch(err => {

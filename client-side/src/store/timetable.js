@@ -40,7 +40,7 @@ export default {
             searchRoutes(data)
                 .then(res => {
                     console.log("timetable/searchRoutes");
-                    console.log(res.data);
+                    window.ym(67271437,'reachGoal','search_routes');
                     commit('setRoutes', res.data.routes);
                 })
                 .catch(er => {
