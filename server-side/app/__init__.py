@@ -40,7 +40,14 @@ CORS(app)
 
 client = app.test_client()
 
-engine = create_engine('sqlite:///db.sqlite')
+engine = create_engine('mysql+mysqlconnector://USERNAME:PASSWORD@DATABASE_URL/DATABASE_NAME')
+
+#existing_databases = engine.execute("SHOW DATABASES;")
+# Results are a list of single item tuples, so unpack each tuple
+#existing_databases = [d[0] for d in existing_databases]
+#if "railwaytickets" not in existing_databases:
+#    engine.execute("CREATE DATABASE railwaytickets")
+#engine.execute("USE railwaytickets")
 session = scoped_session(sessionmaker(
     autocommit=False, autoflush=False, bind=engine))
 
@@ -70,6 +77,10 @@ app.config.update({
     'APISPEC_SPEC': spec,
     'APISPEC_SWAGGER_URL': '/swagger/'
 })
+
+from .model import *
+Base.metadata.create_all(bind=engine)
+
 
 
 def setup_logger():

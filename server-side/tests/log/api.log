@@ -1260,3 +1260,18 @@ TypeError: 'User' object is not subscriptable
 2020-09-12 22:35:56,930:app:INFO:thread 13452 begins the proccess
 2020-09-12 23:25:53,657:app:INFO:thread 3212 begins the proccess
 
+2020-09-13 02:02:44,821:app:INFO:manager 2  accessed tickets list
+2020-09-13 02:02:51,652:app:INFO:manager 2  accessed tickets list
+2020-09-13 02:03:04,230:app:INFO:manager 2  accessed tickets list
+2020-09-13 02:04:30,361:app:INFO:manager 2  accessed tickets list
+2020-09-13 02:04:30,411:app:INFO:manager 2 verified ticket 4
+2020-09-13 02:04:30,420:app:INFO:manager 2  accessed tickets list
+2020-09-13 02:04:30,450:app:INFO:manager 2  accessed tickets list
+2020-09-13 02:04:36,395:app:INFO:manager 2  accessed tickets list
+2020-09-13 02:04:37,623:app:WARNING:Invalid input params: {'buyer_email': ['Not a valid email address.']}
+2020-09-13 02:04:37,666:app:INFO:manager 2  accessed tickets list
+2020-09-13 02:04:37,720:app:INFO:manager 2  accessed tickets list
+2020-09-13 02:04:43,940:app:INFO:user 1 deleted ticket
+2020-09-13 02:04:43,961:app:INFO:user 2 deleted ticket
+2020-09-13 02:04:50,150:app:INFO:manager 2  accessed tickets list
+2020-09-13 02:04:50,196:app:INFO:manager 2  accessed tickets list
