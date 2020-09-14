@@ -43,7 +43,8 @@ class StoppableThread(threading.Thread):
 
 def mockup():
     users = [
-        User(firstname='testn', lastname='testsg', email='testmail@mail.com', password='passw', role='client'),
+        User(firstname='testn', lastname='testsg', email='testmail@mail.com'
+            , password='passw', role='client'),
         User(firstname='testmng', lastname='testmng', email='mngemail@mail.com', password='mngpassw', role='manager')
     ]
     session.add_all(users)
