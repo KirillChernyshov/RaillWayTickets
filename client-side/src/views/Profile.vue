@@ -9,8 +9,8 @@
             </div>
         </div>
         <b-table v-if="tickets.length" sticky-header class="align-left" striped hover :items="tickets" :fields="fields">
-            <template v-if="row.item.is_booked" v-slot:cell(actions)="row">
-                <b-button size="sm" @click="cancelReservation(row.item.ticket_id)" class="mr-2">
+            <template v-slot:cell(actions)="row">
+                <b-button v-if="row.item.is_booked" size="sm" @click="cancelReservation(row.item.ticket_id)" class="mr-2">
                 &#10008;
                 </b-button>
             </template>
