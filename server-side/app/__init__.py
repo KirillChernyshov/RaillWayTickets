@@ -89,7 +89,7 @@ def setup_logger():
 
     formatter = logging.Formatter(
         '%(asctime)s:%(name)s:%(levelname)s:%(message)s')
-    file_handler = logging.FileHandler('RaillWayTickets/server-side/tests/log/api.log')
+    file_handler = logging.FileHandler('tests/log/api.log')
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
