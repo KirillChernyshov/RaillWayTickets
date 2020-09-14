@@ -1,15 +1,15 @@
 # RaillWayTickets
 
 Developers:
-  * Кирилл Чернышов
-  * Владислав Василега
+  * Кирилл Чернышов - k.c.coom@gmail.com
+  * Владислав Василега - vladislavvv2000@yandex.ru
 
 Links:
   * [Доска в Trello](https://trello.com/b/Ta5Iq7rz/raillwaytickets)
   * [Доска в miro.com](https://miro.com/app/board/o9J_kukBD30=/) 
   * [Яндекс метрика](https://metrika.yandex.ru/dashboard?id=67271437)
-  * [Ссылка на приложение](http://chernyshovkirill.pythonanywhere.com/)
-    Аккаунт менеджера: login: mngemail@mail.com | password: mngpassw
+  * [Ссылка на приложение](http://chernyshovkirill.pythonanywhere.com/) <br />
+    Аккаунт менеджера: login: mngemail@mail.com | password: mngpassw <br />
     Аккаунт пользователя: login: testmail@mail.com | password: passw
 
   - [Презентация](https://github.com/KirillChernyshov/RaillWayTickets/blob/master/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F.pdf)
