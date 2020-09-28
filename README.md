@@ -1,8 +1,8 @@
 # RaillWayTickets
 
 Developers:
-  * Кирилл Чернышов - k.c.coom@gmail.com
-  * Владислав Василега - vladislavvv2000@yandex.ru
+  * Кирилл Чернышов - k.c.coom@gmail.com - KirillChernyshov
+  * Владислав Василега - vladislavvv2000@yandex.ru - UnidentifyedPlayer
 
 Links:
   * [Доска в Trello](https://trello.com/b/Ta5Iq7rz/raillwaytickets)
